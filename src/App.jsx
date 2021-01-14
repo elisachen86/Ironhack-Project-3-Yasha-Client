@@ -17,6 +17,9 @@ function App() {
   return (
     <div className="App">
       <NavMain />
+      <div className="container">
+
+      
       <Switch>
         <Route exact path="/" component={Home} />
         <Route exact path="/signin" component={Signin} />
@@ -29,6 +32,7 @@ function App() {
 
         <ProtectedRoute exact path="/profile" component={Profile} />
       </Switch>
+        </div>
     </div>
   );
 }

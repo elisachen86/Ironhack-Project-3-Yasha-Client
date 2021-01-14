@@ -21,6 +21,14 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: theme.spacing(1),
     },
   }));
+
+
+
+  const useStepperStyles = makeStyles({
+      paper:{
+          backgroundColor:"transparent"
+      }
+  })
   
   function getSteps() {
     return ['submitted', 'confirmed', 'packed', 'ready to ship', 'shipped', 'received'];
@@ -30,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
     const classes = useStyles();
     const [activeStep, setActiveStep] = React.useState(0);
     const steps = getSteps();
+    const stepperClasses = useStepperStyles();
   
     const handleNext = () => {
       setActiveStep((prevActiveStep) => prevActiveStep + 1);
@@ -45,7 +54,9 @@ const useStyles = makeStyles((theme) => ({
   
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} alternativeLabel>
+        <Stepper activeStep={activeStep} classes={{
+            root: stepperClasses.paper
+        }} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>{label}</StepLabel>
@@ -54,7 +65,7 @@ const useStyles = makeStyles((theme) => ({
         </Stepper>
         <div>
           {activeStep === steps.length ? (
-            <div>
+            <div className="container">
               <Typography className={classes.instructions}>All steps completed</Typography>
               <Button onClick={handleReset}>Reset</Button>
             </div>
