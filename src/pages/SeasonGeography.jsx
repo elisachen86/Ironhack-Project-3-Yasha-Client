@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Button from "@material-ui/core/Button";
 import Stepper from "../components/Stepper";
 import NavSecond from "../components/NavSecond";
-import CategoryCard from "../components/CategoryCard";
+import CardCategory from "../components/CardCategory";
 
 export default class SeasonGeography extends Component {
   render() {
@@ -12,17 +12,17 @@ export default class SeasonGeography extends Component {
         <Button variant="contained">Filters</Button>
         <h1>34 orders worth 18.000</h1>
         <Stepper></Stepper>
-        <CategoryCard
+        <CardCategory
           geography="Middle East"
           orders="34"
           amount="350"
-        ></CategoryCard>
-        <CategoryCard
+        ></CardCategory>
+        <CardCategory
           geography="Europe"
           orders="50"
           amount="418"
-        ></CategoryCard>
-        <CategoryCard geography="Asia" orders="41" amount="387"></CategoryCard>
+        ></CardCategory>
+        <CardCategory geography="Asia" orders="41" amount="387"></CardCategory>
       </div>
     );
   }

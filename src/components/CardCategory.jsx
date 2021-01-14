@@ -5,7 +5,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-const CategoryCard = (props) => {
+const CardCategory = (props) => {
   return (
     <Card>
       <CardContent>
@@ -26,4 +26,4 @@ const CategoryCard = (props) => {
   );
 };
 
-export default CategoryCard;
+export default CardCategory;

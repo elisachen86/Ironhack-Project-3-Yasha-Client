@@ -9,9 +9,8 @@ import Profile from "./pages/Profile";
 import Dashboard from "./pages/Dashboard";
 import SeasonGeography from "./pages/SeasonGeography";
 import BrandRetailer from "./pages/BrandRetailer";
+import Order from "./pages/Order";
 
-import Orders from "./pages/Orders";
-import OrderDetail from "./pages/OrderDetail";
 import OrderConfirmation from "./components/Forms/FormConfirmOrder";
 import NewOrder from "./components/Forms/FormNewOrder";
 
@@ -26,8 +25,13 @@ function App() {
           <Route exact path="/signin" component={Signin} />
           <Route exact path="/signup" component={Signup} />
           <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/order" component={Orders} />
-          <Route exact path="/order/details" component={OrderDetail} />
+          <Route
+            exact
+            path="/dashboard/categories"
+            component={SeasonGeography}
+          />
+          <Route exact path="/dashboard/company" component={BrandRetailer} />
+          <Route exact path="/order" component={Order} />
           <Route exact path="/order/new" component={NewOrder} />
           <Route
             exact
@@ -36,12 +40,6 @@ function App() {
           />
 
           {/* routes to be discarded */}
-          <Route
-            exact
-            path="/dashboard/categories"
-            component={SeasonGeography}
-          />
-          <Route exact path="/dashboard/company" component={BrandRetailer} />
 
           <ProtectedRoute exact path="/profile" component={Profile} />
         </Switch>
