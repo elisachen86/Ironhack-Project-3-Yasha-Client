@@ -20,9 +20,9 @@ export default class Orders extends Component {
                 <h4>23</h4>
                 <h4>9</h4>
                 <h4>2</h4>
-                <h4></h4>
-                <h4></h4>
-                <h4></h4>
+                <h4>1</h4>
+                <h4>0</h4>
+                <h4>0</h4>
 
                 {/* for the timeline, I used one div for the line and others that will be placed on it for the "bullet points" */}
                 <div className="line"></div>

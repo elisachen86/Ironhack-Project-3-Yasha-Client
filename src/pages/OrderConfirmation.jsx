@@ -53,11 +53,11 @@ export default class OrderConfirmation extends Component {
                     {/* this div will be used for the "pink line of separation" */}
                 <div></div>
 
-            <a href="">Export details</a>
+            <a href="/">Export details</a>
 
             <button>Accept order confirmation</button>
 
-            <a href="">Cancel upload</a>      
+            <a href="/">Cancel upload</a>      
         </div>
         )
     }
