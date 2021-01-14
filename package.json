@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.11.2",
     "@material-ui/icons": "^4.11.2",
+    "@material/top-app-bar": "^9.0.0",
     "axios": "^0.21.1",
     "dayjs": "^1.10.3",
     "dotenv": "^8.2.0",
