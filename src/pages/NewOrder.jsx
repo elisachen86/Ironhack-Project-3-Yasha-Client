@@ -1,13 +1,11 @@
 // Corresponding Figma View: "New order sheet parsed"
 
 import React, { Component } from 'react';
-import NavMain from '../components/NavMain';
 
 export default class NewOrder extends Component {
     render() {
         return (
             <div>
-                <NavMain></NavMain>
                 <i class="fas fa-long-arrow-alt-left"></i> <h1>New Order</h1>
 
                 <form action="">

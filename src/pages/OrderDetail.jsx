@@ -3,13 +3,11 @@
 // a thought: content could instead be put in components for better readability?
 
 import React, { Component } from 'react';
-import NavMain from '../components/NavMain';
 
 export default class OrderDetail extends Component {
     render() {
         return (
             <div>
-                <NavMain></NavMain>
 
                 <i class="fas fa-long-arrow-alt-left"></i> <h1>Maison Plisson</h1>
                 

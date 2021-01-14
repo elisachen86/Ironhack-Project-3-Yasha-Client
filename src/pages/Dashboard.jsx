@@ -8,7 +8,6 @@ export default class Dashboard extends Component {
     render() {
         return (
             <div>
-                <NavMain></NavMain>
                 <h1>Hello Elisa!</h1> 
                 <h2>Today</h2>
                 <div>
