@@ -1,0 +1,69 @@
+/* >>>>>> TEXT <<<<<< */
+
+.area-title {
+    text-align: left;
+}
+.order-recap-line {
+    text-align: center;
+}
+
+.orders-details {
+    color: rgb(165, 165, 165);
+}
+
+/* >>>>>> CONTAINERS & BUTTONS <<<<<< */
+
+.orders-container {
+    background-color: white;
+    margin: 2vw;
+    padding: 10vw;
+    border-radius: 2em;
+}
+
+.area-bar {
+    background-color: white;
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+
+.btn-filter {
+    text-align: center;
+    margin: 1vw;
+    padding: 2vw;
+}
+
+.flex {
+    display: flex;
+}
+
+.item {
+    padding: 1.3vw;
+}
+
+/* >>>>>> IMAGES & ICONS <<<<<< */
+.orders-logo {
+    width: 8vw;
+    height: auto;
+}
+
+i.fas.fa-filter {
+    color: black;
+    width: 20px;
+    height : auto;
+}
+
+/* >>>>>> TIMELINE <<<<<< */
+
+.line {
+    width: 90vw;
+    height: 1vh;
+    background-color: #DAABB0;
+}
+
+.bullet-points {
+    width: 1.55vw;
+    height: 3vh;
+    border-radius: 50%;
+    background-color: #DAABB0;
+}

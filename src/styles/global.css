@@ -10,6 +10,10 @@
   box-sizing: border-box;
 }
 
+body {
+  background-color: rgb(224, 229, 245);
+}
+
 html {
   font-family: "Manrope", sans-serif;
 }
@@ -21,4 +25,9 @@ a {
 
 ul {
   list-style-type: none;
+}
+
+span {
+  font-weight: bold;
+  font-size: 1.2em;
 }

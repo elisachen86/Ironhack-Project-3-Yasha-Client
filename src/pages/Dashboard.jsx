@@ -2,7 +2,7 @@
 // For the desktop version: the notifications and filters will appear on the side (when activated?/clicked on)
 
 import React, { Component } from 'react';
-import NavMain from '../components/NavMain';
+import Stepper from '../components/Stepper';
 
 export default class Dashboard extends Component {
     render() {
@@ -23,30 +23,7 @@ export default class Dashboard extends Component {
                 <h2>Your sales orders</h2>
                 <h3>All open seasons (91 orders)<i class="fas fa-sort-down"></i></h3>
 
-                {/* Numbers of orders that are in each state (hardcoded for now) */}
-                <h4>78</h4>
-                <h4>12</h4>
-                <h4>1</h4>
-                <h4>0</h4>
-                <h4>0</h4>
-                <h4>0</h4>
-
-                {/* for the timeline, I used one div for the line and others that will be placed on it for the "bullet points" */}
-                <div className="line"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                <div className="bullet-points"></div>
-                {/* end of timeline. the corresponding status will be placed w/ css */}
-                <h4>submitted</h4>
-                <h4>confirmed</h4>
-                <h4>packed</h4>
-                <h4>ready to ship</h4>
-                <h4>shipped</h4>
-                <h4>received</h4>
+                <Stepper></Stepper>
 
                 <div>
                     <img src="" alt="Middle East Logo"/>
