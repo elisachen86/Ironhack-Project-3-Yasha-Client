@@ -127,6 +127,20 @@ class FormSignup extends Component {
                 />
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  name="company"
+                  label="Company"
+                  type="company"
+                  id="company"
+                  autoComplete="Company"
+                  onChange={this.handleChange}
+                />
+              </Grid>
+
+              <Grid item xs={12}>
                 <FormControlLabel
                   control={
                     <Checkbox

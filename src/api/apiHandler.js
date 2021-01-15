@@ -23,6 +23,17 @@ export default {
       .catch(errorHandler);
   },
 
+  editUserInfo(userInfo) {
+    return service
+      .patch("/api/user/me", userInfo)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  getUserCompanyInfo(companyId) {
+    return service;
+  },
+
   signin(userInfo) {
     return service
       .post("/api/auth/signin", userInfo)
