@@ -30,8 +30,11 @@ export default {
       .catch(errorHandler);
   },
 
-  getUserCompanyInfo(companyId) {
-    return service;
+  getUserCompanyInfo() {
+    return service
+      .get("/api/company/mycompany")
+      .then((res) => res.data)
+      .catch(errorHandler);
   },
 
   signin(userInfo) {
