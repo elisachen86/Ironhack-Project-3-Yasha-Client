@@ -31,40 +31,51 @@ const useStyles = makeStyles((theme) => ({
   })
   
   function getSteps() {
-    return ['submitted', 'confirmed', 'packed', 'ready to ship', 'shipped', 'received'];
+    return   ['submitted', 'confirmed', 'packed', 'ready to ship', 'shipped', 'received'];
   }
 
-  export default function HorizontalLabelPositionBelowStepper() {
+
+  
+
+  function getStepContent(stage) {
+    switch (stage) { // stage c'est l'étape 
+      case "submitted": // la partie de l'array qui change
+        return  <div>fejfeiafjaoifjaiofjaeiofjaoijfao</div>; // la partie jsx qui va être render dynamiquement
+      case "completed":
+        return 'What is an ad group anyways?';
+      case "ready_to_ship":
+        return 'This is the bit I really care about!';
+      default:
+        return 'Unknown stepIndex';
+    }
+  }
+
+
+  export default function HorizontalLabelPositionBelowStepper(props) {
     const classes = useStyles();
-    const [activeStep, setActiveStep] = React.useState(0);
+
     const steps = getSteps();
     const stepperClasses = useStepperStyles();
   
-    const handleNext = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    };
-  
-    const handleBack = () => {
-      setActiveStep((prevActiveStep) => prevActiveStep - 1);
-    };
-  
-    const handleReset = () => {
-      setActiveStep(0);
-    };
+
+
+
+
+
   
     return (
       <div className={classes.root}>
-        <Stepper activeStep={activeStep} classes={{
-            root: stepperClasses.paper
+        <Stepper activeStep={0} classes={{ // active step c'est le stage en cours
+            root: stepperClasses.paper // cette ligne sert à override le css du component (pour le rendre transparent)
         }} alternativeLabel>
-          {steps.map((label) => (
+          {steps.map((label) => ( // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
             <Step key={label}>
-              <StepLabel>{label}</StepLabel>
+              <StepLabel>{label}</StepLabel> 
             </Step>
           ))}
         </Stepper>
-        <div>
-          {activeStep === steps.length ? (
+        <div> 
+          {activeStep === steps.length ? ( // ici on a un ternary. en gros: si on arrive à la fin de l'array, on a "all steps completed" sinon on peut progresser
             <div className="container">
               <Typography className={classes.instructions}>All steps completed</Typography>
               <Button onClick={handleReset}>Reset</Button>
@@ -72,18 +83,7 @@ const useStyles = makeStyles((theme) => ({
           ) : (
             <div>
               {/* <Typography className={classes.instructions}>{getStepContent(activeStep)}</Typography> */}
-              <div>
-                <Button
-                  disabled={activeStep === 0}
-                  onClick={handleBack}
-                  className={classes.backButton}
-                >
-                  Back
-                </Button>
-                <Button variant="contained" color="primary" onClick={handleNext}>
-                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
-                </Button>
-              </div>
+             
             </div>
           )}
         </div>
