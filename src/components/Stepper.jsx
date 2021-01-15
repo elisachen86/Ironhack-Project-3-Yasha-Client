@@ -53,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 
   export default function HorizontalLabelPositionBelowStepper(props) {
     const classes = useStyles();
-
+    const activeStep = 0;
     const steps = getSteps();
     const stepperClasses = useStepperStyles();
   
@@ -78,7 +78,7 @@ const useStyles = makeStyles((theme) => ({
           {activeStep === steps.length ? ( // ici on a un ternary. en gros: si on arrive à la fin de l'array, on a "all steps completed" sinon on peut progresser
             <div className="container">
               <Typography className={classes.instructions}>All steps completed</Typography>
-              <Button onClick={handleReset}>Reset</Button>
+              <Button >Reset</Button>
             </div>
           ) : (
             <div>
