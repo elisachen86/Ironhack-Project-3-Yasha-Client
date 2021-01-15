@@ -4,12 +4,54 @@
 import React, { Component } from "react";
 import Stepper from "../components/Stepper";
 import CardDashboard from "../components/CardDashboard";
+import { withUser } from "../components/Auth/withUser";
+import apiHandler from "../api/apiHandler";
+import Typography from "@material-ui/core/Typography";
 
-export default class Dashboard extends Component {
+
+
+
+class Dashboard extends Component {
+
+  // static contextType = UserContext;
+
+
+  state = {
+    orders: null
+  }
+
+
+
+  async componentDidMount() {
+
+    const data = await apiHandler.getAllOrders()
+    console.log(data)
+    this.setState({ orders: data })
+    const seasonsNames = [...new Set(data.map(order => order.season))]
+    console.log(seasonsNames)
+    const separateOrder = data.reduce((acc, order) =>{
+      const price = order.items.reduce((acc, item) => acc += item.price * item.quantity , 0)
+    return acc[order.season] 
+    ? [...acc[order.season], price] 
+    : acc[order.season] = [price]
+  }, {})
+    console.log(seasonsNames.map((season,i)=>({[season]:separateOrder[i]})))
+    
+  }
+
   render() {
+
+    console.log(this.props)
+
+    const { context } = this.props;
+
+    if (!this.state.orders) {
+      return <div>Loading.....</div>;
+    }
+
     return (
       <div>
-        <h1>Hello Elisa!</h1>
+        <h1>Hello  {context.user && context.user.firstName}</h1>
         <h2>Today</h2>
         <div>
           <i class="fas fa-exclamation-triangle"></i>
@@ -27,6 +69,13 @@ export default class Dashboard extends Component {
         </h3>
 
         <Stepper></Stepper>
+
+
+        {this.state.orders.map((arr) => (
+          <Typography color="textSecondary">
+            {arr.category}
+          </Typography>
+        ))}
 
         <CardDashboard
           category="Middle East"
@@ -48,3 +97,6 @@ export default class Dashboard extends Component {
     );
   }
 }
+
+
+export default withUser(Dashboard)

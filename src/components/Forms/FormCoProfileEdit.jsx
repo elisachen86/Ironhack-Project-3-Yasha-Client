@@ -14,17 +14,18 @@ import Select from "@material-ui/core/Select";
 export class FormCoProfileEdit extends Component {
   state = {};
 
-  componentDidMount() {
+  async componentDidMount() {
     const { context } = this.props;
     const { user } = context;
-    console.log(user);
+    // console.log(user.company);
 
-    this.setState({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-    });
+    const companyInfo = await apiHandler.getUserCompanyInfo();
+    try {
+      this.setState(companyInfo);
+      // console.log(this.state);
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   handleChange = (event) => {
@@ -52,21 +53,27 @@ export class FormCoProfileEdit extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(this.props);
 
     return this.state.name ? (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
           <Typography component="h1" variant="h5">
-            Add your company
+            Your Company Info
           </Typography>
           <form
             onSubmit={this.handleSubmit}
             onChange={this.handleChange}
             noValidate
           >
-            <TextField id="name" name="name" fullWidth label="Company Name" />
+            <TextField
+              id="name"
+              name="name"
+              fullWidth
+              label="Company Name"
+              defaultValue={this.state.name}
+            />
             <InputLabel shrink="true" id="companyType">
               Company Type
             </InputLabel>
@@ -77,6 +84,7 @@ export class FormCoProfileEdit extends Component {
               id="companyType"
               name="companyType"
               onChange={this.handleChange}
+              defaultValue={this.state.companyType}
             >
               <MenuItem value="Retailer">Retailer</MenuItem>
               <MenuItem value="Brand">Brand</MenuItem>
@@ -86,28 +94,49 @@ export class FormCoProfileEdit extends Component {
               name="email"
               fullWidth
               label="Main Email Contact"
+              defaultValue={this.state.email}
             />
             <TextField
               id="phoneNumber"
               name="phoneNumber"
               fullWidth
               label="Main Phone Number"
+              defaultValue={this.state.phoneNumber}
             />
-            <TextField id="vatNb" name="vatNb" fullWidth label="VAT Number" />
+            <TextField
+              id="vatNb"
+              name="vatNb"
+              fullWidth
+              label="VAT Number"
+              defaultValue={this.state.vatNb}
+            />
             <TextField
               id="shippingAddress"
               name="shippingAddress"
               fullWidth
               label="Shipping Address"
+              defaultValue={this.state.shippingAddress}
             />
             <TextField
               id="billingAddress"
               name="billingAddress"
               fullWidth
               label="Billing Address"
+              defaultValue={this.state.billingAddress}
             />
+            <Typography component="h1" variant="h5">
+              Current users
+            </Typography>
+            {this.state.userList.map((user) => {
+              return (
+                <Typography component="h1" variant="h5">
+                  {user.firstName} {user.lastName}
+                </Typography>
+              );
+            })}
+
             <Button type="submit" fullWidth variant="contained" color="primary">
-              Create Company Profile
+              Save changes
             </Button>
           </form>
         </div>
