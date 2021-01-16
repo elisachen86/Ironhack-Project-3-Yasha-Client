@@ -55,6 +55,8 @@ class Dashboard extends Component {
         <Typography variant="subtitle1" gutterBottom><p>Today</p> </Typography>
 
         {/* <h2>Today</h2> */}
+        
+        <Typography variant="subtitle1" gutterBottom><p>Today</p> </Typography>
 
         
         <div>
