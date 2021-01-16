@@ -1,11 +1,20 @@
 import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import Button from "@material-ui/core/Button";
 
 class Home extends React.Component {
   render() {
     return (
-      <div>
-        <h1>Home Page ∆</h1>
-      </div>
+      <Container>
+        <Typography variant="h2">Welcome to Yasha</Typography>
+        <Button variant="contained" color="primary" href="/signin">
+          Log In
+        </Button>
+        <Button variant="contained" color="primary" href="/signup">
+          Sign Up
+        </Button>
+      </Container>
     );
   }
 }
