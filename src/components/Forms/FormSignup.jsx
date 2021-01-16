@@ -31,19 +31,12 @@ class FormSignup extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const companyName = { name: this.state.company };
-    const userInfo = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password,
-    };
 
     apiHandler
-      .signup(userInfo)
+      .signup(this.state)
       .then((data) => {
         this.context.setUser(data);
-        apiHandler.createCompany(companyName);
+        apiHandler.createCompany({ name: this.state.company });
       })
       .catch((error) => {
         console.log(error);
