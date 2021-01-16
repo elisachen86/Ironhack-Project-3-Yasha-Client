@@ -10,40 +10,38 @@ import Typography from "@material-ui/core/Typography";
 
 
 
-
 class Dashboard extends Component {
-
-  // static contextType = UserContext;
-
 
   state = {
     orders: null
   }
 
-
-
   async componentDidMount() {
 
     const data = await apiHandler.getAllOrders()
     console.log(data)
-    this.setState({ orders: data })
     const seasonsNames = [...new Set(data.map(order => order.season))]
     console.log(seasonsNames)
     const separateOrder = data.reduce((acc, order) =>{
-      const price = order.items.reduce((acc, item) => acc += item.price * item.quantity , 0)
-    return acc[order.season] 
-    ? [...acc[order.season], price] 
-    : acc[order.season] = [price]
+          const price = order.items.reduce((acc, item) => acc += item.price * item.quantity , 0)
+          return acc[order.season] 
+          ? [...acc[order.season], price] 
+          : acc[order.season] = [price]
   }, {})
-    console.log(seasonsNames.map((season,i)=>({[season]:separateOrder[i]})))
-    
+      console.log(separateOrder)
+      const seasonsNamesAndTotal = seasonsNames.map((season,i)=>({[season]:separateOrder[i]}))
+      console.log(seasonsNamesAndTotal)
+
+      this.setState({ orders: data })
+      // , lists: seasonsNames, totals: separateOrder
+
   }
+
 
   render() {
 
-    console.log(this.props)
-
     const { context } = this.props;
+
 
     if (!this.state.orders) {
       return <div>Loading.....</div>;
@@ -51,8 +49,14 @@ class Dashboard extends Component {
 
     return (
       <div>
-        <h1>Hello  {context.user && context.user.firstName}</h1>
-        <h2>Today</h2>
+        
+        <Typography variant="h4" component="h1"><p>Hello  {context.user && context.user.firstName}</p> </Typography>
+
+        <Typography variant="subtitle1" gutterBottom><p>Today</p> </Typography>
+
+        {/* <h2>Today</h2> */}
+
+        
         <div>
           <i class="fas fa-exclamation-triangle"></i>
           <h3>4 orders need your attention</h3>
@@ -65,17 +69,17 @@ class Dashboard extends Component {
         </div>
         <h2>Your sales orders</h2>
         <h3>
-          All open seasons (91 orders)<i class="fas fa-sort-down"></i>
+          All open seasons <span>{this.state.orders.length}</span> orders<i class="fas fa-sort-down"></i>
         </h3>
-
+        
         <Stepper></Stepper>
 
 
-        {this.state.orders.map((arr) => (
-          <Typography color="textSecondary">
-            {arr.category}
+        {/* {this.getOrdersTotalBySector.map((arr) => (
+          <Typography color="textSecondary" key={arr._id}>
+            {arr._id}
           </Typography>
-        ))}
+        ))} */}
 
         <CardDashboard
           category="Middle East"
