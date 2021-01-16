@@ -107,10 +107,12 @@ class FormSignup extends Component {
                   variant="outlined"
                   required
                   fullWidth
+                  type="email"
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  autoFocus
                   onChange={this.handleChange}
                 />
               </Grid>

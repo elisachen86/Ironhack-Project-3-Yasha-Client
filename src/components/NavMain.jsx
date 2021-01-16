@@ -48,9 +48,11 @@ const NavMain = (props) => {
       });
   }
 
+  console.log(context);
+
   return (
     <nav className="NavMain">
-      <NavLink exact to="/">
+      <NavLink exact to={context.isLoggedIn ? "/dashboard" : "/"}>
         <h3 className="logo">YASHA</h3>
       </NavLink>
       <ul className="nav-list">
@@ -73,11 +75,13 @@ const NavMain = (props) => {
                   aria-haspopup="true"
                   onClick={handleClick}
                 >
+                  {/* {context.user && ( */}
                   <Avatar
                     alt={context.user.firstName}
                     src={context.user.avatar}
                     className={classes.small}
                   ></Avatar>
+                  {/* )} */}
                 </Button>
                 <Menu
                   id="simple-menu"
