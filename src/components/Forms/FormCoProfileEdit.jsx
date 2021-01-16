@@ -42,10 +42,10 @@ export class FormCoProfileEdit extends Component {
     const { authContext } = this.props;
 
     apiHandler
-      .editUserInfo(this.state)
+      .editCompanyInfo(this.state)
       .then((data) => {
-        authContext.setUser(data);
-        this.props.history.push("/profile");
+        // authContext.setUser(data);
+        this.props.history.push("/dashboard");
       })
       .catch((error) => {
         console.log(error);

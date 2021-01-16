@@ -38,6 +38,13 @@ export default {
       .catch(errorHandler);
   },
 
+  editCompanyInfo(companyInfo) {
+    return service
+      .patch("/api/company/mycompany", companyInfo)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
   signin(userInfo) {
     return service
       .post("/api/auth/signin", userInfo)
@@ -59,7 +66,7 @@ export default {
       .catch(errorHandler);
   },
 
- ///   ROUTERS : USER  ///
+  ///   ROUTERS : USER  ///
 
   getUserInfo() {
     return service
@@ -69,61 +76,60 @@ export default {
   },
 
   updateUserInfo(data) {
-      return service
+    return service
       .patch("/api/user/me")
       .then((res) => res.data)
-      .catch(errorHandler)
-  }, 
+      .catch(errorHandler);
+  },
 
-
-   ///   ROUTERS : COMPANY  ///
-   createCompany(data){
-     return service
-     .post("/api/company/mycompany")
-     .then((res) => res.data)
-     .catch(errorHandler)
-   },
-
-   getCompanyInfo(){
+  ///   ROUTERS : COMPANY  ///
+  createCompany(data) {
     return service
-    .get("/api/company/mycompany")
-    .then((res) => res.data)
-    .catch(errorHandler)
-   },
+      .post("/api/company/mycompany")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-   updateCompanyInfo(data){
-     return service
-     .patch("/api/company/mycompany")
-     .then((res) => res.data)
-     .catch(errorHandler)
-   }, 
+  getCompanyInfo() {
+    return service
+      .get("/api/company/mycompany")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-    ///   ROUTERS : ORDER  ///
-    getAllOrders(){
-      return service
+  updateCompanyInfo(data) {
+    return service
+      .patch("/api/company/mycompany")
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
+
+  ///   ROUTERS : ORDER  ///
+  getAllOrders() {
+    return service
       .get("/api/order")
       .then((res) => res.data)
-      .catch(errorHandler)
-    },
+      .catch(errorHandler);
+  },
 
-    getOneOrder(orderId){
-        return service
-        .get(`/api/order/${orderId}`)
-        .then((res) => res.data)
-        .catch(errorHandler)
-    }, 
+  getOneOrder(orderId) {
+    return service
+      .get(`/api/order/${orderId}`)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-    createOneOrder(data){
-        return service
-        .post("/api/order", data)
-        .then((res) => res.data)
-        .catch(errorHandler)
-    },
+  createOneOrder(data) {
+    return service
+      .post("/api/order", data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 
-    updateOneOrder(orderId, data){
-      return service
+  updateOneOrder(orderId, data) {
+    return service
       .patch(`/api/order/${orderId}`, data)
       .then((res) => res.data)
-      .catch(errorHandler)
-    },
+      .catch(errorHandler);
+  },
 };
