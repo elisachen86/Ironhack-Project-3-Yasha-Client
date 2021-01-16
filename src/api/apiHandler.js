@@ -31,20 +31,6 @@ export default {
       .catch(errorHandler);
   },
 
-  getUserCompanyInfo() {
-    return service
-      .get("/api/company/mycompany")
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
-
-  editCompanyInfo(companyInfo) {
-    return service
-      .patch("/api/company/mycompany", companyInfo)
-      .then((res) => res.data)
-      .catch(errorHandler);
-  },
-
   signin(userInfo) {
     return service
       .post("/api/auth/signin", userInfo)
@@ -83,23 +69,25 @@ export default {
   },
 
   ///   ROUTERS : COMPANY  ///
-  createCompany(data) {
+  createCompany(companyInfo) {
     return service
-      .post("/api/company/mycompany")
+      .post("/api/company/mycompany", companyInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
-  getCompanyInfo() {
+  getUserCompanyInfo() {
     return service
       .get("/api/company/mycompany")
       .then((res) => res.data)
       .catch(errorHandler);
   },
 
-  updateCompanyInfo(data) {
+  getCompanyInfo() {},
+
+  editCompanyInfo(companyInfo) {
     return service
-      .patch("/api/company/mycompany")
+      .patch("/api/company/mycompany", companyInfo)
       .then((res) => res.data)
       .catch(errorHandler);
   },
