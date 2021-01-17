@@ -69,65 +69,65 @@ const NavMain = (props) => {
           </NavLink>
         </Grid>
         <Grid item>
-          <ul className="nav-list">
-            {context.isLoggedIn && (
-              <React.Fragment>
-                <Grid container justify="center" className={classes.root}>
-                  <Grid>
-                    {/* <Button color="primary"> */}
-                    <SearchIcon></SearchIcon>
-                    {/* </Button> */}
-                  </Grid>
-                  <Grid>
-                    {/* <Button color="primary"> */}
-                    <NotificationsIcon></NotificationsIcon>
-                    {/* </Button> */}
-                  </Grid>
-                  <Grid>
-                    <Button
-                      aria-controls="simple-menu"
-                      aria-haspopup="true"
-                      size="small"
-                      onClick={handleClick}
-                    >
-                      {/* {context.user && ( */}
-                      <Avatar
-                        alt={context.user.firstName}
-                        src={context.user.avatar}
-                        className={classes.small}
-                      ></Avatar>
-                    </Button>
-                    {/* )} */}
-                    <Menu
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
-                    >
-                      <MenuItem onClick={handleClose}>
-                        <Link href="/profile">My user profile</Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleClose}>
-                        <Link href="/company">My company profile</Link>
-                      </MenuItem>
-                      <MenuItem onClick={handleLogout}>Logout</MenuItem>
-                    </Menu>
-                  </Grid>
+          {context.isLoggedIn && (
+            <React.Fragment>
+              <Grid container justify="center" className={classes.root}>
+                <Grid>
+                  {/* <Button color="primary"> */}
+                  <SearchIcon></SearchIcon>
+                  {/* </Button> */}
                 </Grid>
-              </React.Fragment>
-            )}
-            {!context.isLoggedIn && (
-              <React.Fragment>
-                <li>
-                  <NavLink to="/signin">Log in</NavLink>
-                </li>
-                {/* <li>
+                <Grid>
+                  {/* <Button color="primary"> */}
+                  <NotificationsIcon></NotificationsIcon>
+                  {/* </Button> */}
+                </Grid>
+                <Grid>
+                  <Button
+                    aria-controls="simple-menu"
+                    aria-haspopup="true"
+                    size="small"
+                    onClick={handleClick}
+                  >
+                    {/* {context.user && ( */}
+                    <Avatar
+                      alt={context.user.firstName}
+                      src={context.user.avatar}
+                      className={classes.small}
+                    ></Avatar>
+                  </Button>
+                  {/* )} */}
+                  <Menu
+                    id="simple-menu"
+                    anchorEl={anchorEl}
+                    keepMounted
+                    open={Boolean(anchorEl)}
+                    onClose={handleClose}
+                  >
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/profile">My user profile</Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleClose}>
+                      <Link href="/company">My company profile</Link>
+                    </MenuItem>
+                    <MenuItem onClick={handleLogout}>Logout</MenuItem>
+                  </Menu>
+                </Grid>
+              </Grid>
+            </React.Fragment>
+          )}
+          {!context.isLoggedIn && (
+            <React.Fragment>
+              <Grid item>
+                <Button href="/signin" color="inherit">
+                  Log in
+                </Button>
+              </Grid>
+              {/* <li>
               <NavLink to="/signup">Create account</NavLink>
             </li> */}
-              </React.Fragment>
-            )}
-          </ul>
+            </React.Fragment>
+          )}
         </Grid>
       </Grid>
     </AppBar>
