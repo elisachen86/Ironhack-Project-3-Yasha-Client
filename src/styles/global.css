@@ -46,6 +46,9 @@ span {
   font-size: 1.2em;
 }
 
+#navbar {
+  margin: 10px;
+}
 .auth-container {
   margin-top: 20px;
 }
@@ -66,7 +69,7 @@ span {
   margin: 10px;
 }
 
-@media (min-width: 600px) {
+@media (min-width: 900px) {
   .dashboard-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -96,7 +99,7 @@ span {
   }
 }
 
-@media (max-width: 599px) {
+@media (max-width: 899px) {
   .dashboard-container {
     margin: 10px;
   }

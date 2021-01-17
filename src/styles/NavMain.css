@@ -1,5 +1,5 @@
-.NavMain {
-  background-color: #252A36;
+/* .NavMain {
+  background-color: #252a36;
   color: rgb(255, 255, 255);
   display: flex;
   align-items: center;
@@ -14,4 +14,4 @@
 
 .NavMain .nav-list li:not(:last-child) {
   margin-right: 20px;
-}
+} */
