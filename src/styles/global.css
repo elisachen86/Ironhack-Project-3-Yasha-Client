@@ -62,11 +62,15 @@ span {
   margin: 10px 0px;
 }
 
+.catBrandContainer {
+  margin: 10px;
+}
+
 @media (min-width: 600px) {
   .dashboard-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 8fr;
+    grid-template-rows: 1fr 6fr;
     margin: 10px;
   }
   .dashboard-fullrow {

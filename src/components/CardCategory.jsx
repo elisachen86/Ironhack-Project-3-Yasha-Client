@@ -9,9 +9,9 @@ const CardCategory = (props) => {
   return (
     <Card className="card">
       <CardContent>
-        <Typography color="textSecondary" gutterBottom>
+        {/* <Typography color="textSecondary" gutterBottom>
           Image
-        </Typography>
+        </Typography> */}
         <Typography variant="h5" component="h2">
           {props.geography}
         </Typography>
@@ -19,9 +19,7 @@ const CardCategory = (props) => {
           {props.orders} orders - ${props.amount}k
         </Typography>
       </CardContent>
-      <CardActions>
-        <Button size="small">See more</Button>
-      </CardActions>
+      <CardActions>{/* <Button size="small">See more</Button> */}</CardActions>
     </Card>
   );
 };

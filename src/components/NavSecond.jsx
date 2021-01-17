@@ -8,7 +8,7 @@ import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 const NavSecond = (props) => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar color="textSecondary" position="static">
         <Toolbar>
           <IconButton>
             <ArrowBackIcon />
