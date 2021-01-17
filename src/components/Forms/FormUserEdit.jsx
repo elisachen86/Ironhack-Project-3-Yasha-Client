@@ -55,9 +55,13 @@ export class FormUserEdit extends Component {
     // console.log(this.props);
     return this.state.firstName ? (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div>
-          <Typography component="h1" variant="h5">
+          <Typography
+            align="center"
+            component="h1"
+            variant="h5"
+            gutterBottom="true"
+          >
             Complete your profile
           </Typography>
           <form
@@ -71,6 +75,7 @@ export class FormUserEdit extends Component {
               fullWidth
               label="First Name"
               defaultValue={this.state.firstName}
+              margin="normal"
             />
             <TextField
               id="lastName"

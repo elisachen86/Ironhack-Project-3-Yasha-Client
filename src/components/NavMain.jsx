@@ -16,6 +16,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import "../styles/NavMain.css";
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    "& > *": {
+      margin: theme.spacing(1),
+    },
+  },
   small: {
     width: theme.spacing(3),
     height: theme.spacing(3),
@@ -58,21 +63,22 @@ const NavMain = (props) => {
       <ul className="nav-list">
         {context.isLoggedIn && (
           <React.Fragment>
-            <Grid container justify="center">
+            <Grid container justify="center" className={classes.root}>
               <Grid>
-                <Button color="primary">
-                  <SearchIcon></SearchIcon>
-                </Button>
+                {/* <Button color="primary"> */}
+                <SearchIcon></SearchIcon>
+                {/* </Button> */}
               </Grid>
               <Grid>
-                <Button color="primary">
-                  <NotificationsIcon></NotificationsIcon>
-                </Button>
+                {/* <Button color="primary"> */}
+                <NotificationsIcon></NotificationsIcon>
+                {/* </Button> */}
               </Grid>
               <Grid>
                 <Button
                   aria-controls="simple-menu"
                   aria-haspopup="true"
+                  size="small"
                   onClick={handleClick}
                 >
                   {/* {context.user && ( */}
@@ -81,8 +87,8 @@ const NavMain = (props) => {
                     src={context.user.avatar}
                     className={classes.small}
                   ></Avatar>
-                  {/* )} */}
                 </Button>
+                {/* )} */}
                 <Menu
                   id="simple-menu"
                   anchorEl={anchorEl}

@@ -57,9 +57,13 @@ export class FormCoProfileEdit extends Component {
 
     return this.state.name ? (
       <Container component="main" maxWidth="xs">
-        <CssBaseline />
         <div>
-          <Typography component="h1" variant="h5">
+          <Typography
+            align="center"
+            component="h1"
+            variant="h5"
+            gutterBottom="true"
+          >
             Your Company Info
           </Typography>
           <form
