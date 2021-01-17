@@ -8,6 +8,8 @@ import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
 import Grid from "@material-ui/core/Grid";
 import { UserContext } from "../components/Auth/UserContext";
+import apiHandler from "../api/apiHandler";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
@@ -30,12 +32,11 @@ const Order = () => {
 
   // use effect with [] is the equivalent of componentDidMount
   useEffect(() => {
+    // apiHandler.getOneOrder(req.params.id);
     //api call
     //    setOrder(data)
     // set some state
   }, []);
-
-  //fdoieajfiajfiaojfaoifjiaofaefefeifjaiefioa
 
   return (
     <div>
