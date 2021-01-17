@@ -10,6 +10,9 @@ import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import Grid from "@material-ui/core/Grid";
+import Avatar from "@material-ui/core/Avatar";
 
 export class FormCoProfileEdit extends Component {
   state = {};
@@ -56,7 +59,7 @@ export class FormCoProfileEdit extends Component {
     // console.log(this.props);
 
     return this.state.name ? (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="auth-container">
         <div>
           <Typography
             align="center"
@@ -75,28 +78,35 @@ export class FormCoProfileEdit extends Component {
               id="name"
               name="name"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Company Name"
               defaultValue={this.state.name}
             />
-            <InputLabel shrink="true" id="companyType">
-              Company Type
-            </InputLabel>
 
-            <Select
-              fullWidth
-              labelId="companyType"
-              id="companyType"
-              name="companyType"
-              onChange={this.handleChange}
-              defaultValue={this.state.companyType}
-            >
-              <MenuItem value="Retailer">Retailer</MenuItem>
-              <MenuItem value="Brand">Brand</MenuItem>
-            </Select>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel shrink="true" id="companyType">
+                Company Type
+              </InputLabel>
+              <Select
+                fullWidth
+                labelId="companyType"
+                id="companyType"
+                name="companyType"
+                onChange={this.handleChange}
+                defaultValue={this.state.companyType}
+              >
+                <MenuItem value="Retailer">Retailer</MenuItem>
+                <MenuItem value="Brand">Brand</MenuItem>
+              </Select>
+            </FormControl>
+
             <TextField
               id="email"
               name="email"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Main Email Contact"
               defaultValue={this.state.email}
             />
@@ -104,6 +114,8 @@ export class FormCoProfileEdit extends Component {
               id="phoneNumber"
               name="phoneNumber"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Main Phone Number"
               defaultValue={this.state.phoneNumber}
             />
@@ -111,6 +123,8 @@ export class FormCoProfileEdit extends Component {
               id="vatNb"
               name="vatNb"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="VAT Number"
               defaultValue={this.state.vatNb}
             />
@@ -118,6 +132,8 @@ export class FormCoProfileEdit extends Component {
               id="shippingAddress"
               name="shippingAddress"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Shipping Address"
               defaultValue={this.state.shippingAddress}
             />
@@ -125,17 +141,20 @@ export class FormCoProfileEdit extends Component {
               id="billingAddress"
               name="billingAddress"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Billing Address"
               defaultValue={this.state.billingAddress}
             />
-            <Typography component="h1" variant="h5">
-              Current users
-            </Typography>
+            <Typography variant="h6">Current users</Typography>
             {this.state.userList.map((user) => {
               return (
-                <Typography component="h1" variant="h5">
-                  {user.firstName} {user.lastName}
-                </Typography>
+                <Grid container alignItems="center" className="current-users">
+                  <Avatar alt={user.firstName} src={user.avatar}></Avatar>
+                  <Typography variant="body1">
+                    {user.firstName} {user.lastName} ({user.permission})
+                  </Typography>
+                </Grid>
               );
             })}
 

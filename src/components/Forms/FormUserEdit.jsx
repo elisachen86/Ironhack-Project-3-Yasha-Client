@@ -10,6 +10,8 @@ import Container from "@material-ui/core/Container";
 import InputLabel from "@material-ui/core/InputLabel";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
+import Box from "@material-ui/core/Box";
 
 export class FormUserEdit extends Component {
   state = {};
@@ -54,7 +56,7 @@ export class FormUserEdit extends Component {
   render() {
     // console.log(this.props);
     return this.state.firstName ? (
-      <Container component="main" maxWidth="xs">
+      <Container component="main" maxWidth="xs" className="auth-container">
         <div>
           <Typography
             align="center"
@@ -73,6 +75,8 @@ export class FormUserEdit extends Component {
               id="firstName"
               name="firstName"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="First Name"
               defaultValue={this.state.firstName}
               margin="normal"
@@ -81,6 +85,8 @@ export class FormUserEdit extends Component {
               id="lastName"
               name="lastName"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Last Name"
               defaultValue={this.state.lastName}
             />
@@ -88,68 +94,93 @@ export class FormUserEdit extends Component {
               id="email"
               name="email"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Email Address"
               defaultValue={this.state.email}
+            />
+            <TextField
+              id="password"
+              name="password"
+              fullWidth
+              variant="outlined"
+              margin="normal"
+              label="Password"
+              defaultValue={this.state.password}
             />
             <TextField
               id="company"
               name="company"
               fullWidth
+              variant="outlined"
+              margin="normal"
               label="Company Name"
               defaultValue={this.state.company}
             />
-            <InputLabel shrink="true" id="userType">
-              Company Type
-            </InputLabel>
-            <Select
-              fullWidth
-              labelId="userType"
-              id="userType"
-              name="userType"
-              defaultValue={this.state.userType}
-              onChange={this.handleChange}
-            >
-              <MenuItem value="Retailer">Retailer</MenuItem>
-              <MenuItem value="Brand">Brand</MenuItem>
-            </Select>
-            <InputLabel shrink="true" id="permission">
-              Permission
-            </InputLabel>
-            <Select
-              fullWidth
-              labelId="permission"
-              id="permission"
-              name="permission"
-              defaultValue={this.state.permission}
-              onChange={this.handleChange}
-            >
-              <MenuItem value="Admin">Admin</MenuItem>
-              <MenuItem value="Editor">Editor</MenuItem>
-            </Select>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel shrink="true" id="userType">
+                Company Type
+              </InputLabel>
+              <Select
+                fullWidth
+                labelId="userType"
+                id="userType"
+                name="userType"
+                defaultValue={this.state.userType}
+                onChange={this.handleChange}
+              >
+                <MenuItem value="Retailer">Retailer</MenuItem>
+                <MenuItem value="Brand">Brand</MenuItem>
+              </Select>
+            </FormControl>
+            <FormControl fullWidth variant="outlined" margin="normal">
+              <InputLabel shrink="true" id="permission">
+                Permission
+              </InputLabel>
+              <Select
+                fullWidth
+                labelId="permission"
+                id="permission"
+                name="permission"
+                defaultValue={this.state.permission}
+                onChange={this.handleChange}
+              >
+                <MenuItem value="Admin">Admin</MenuItem>
+                <MenuItem value="Editor">Editor</MenuItem>
+              </Select>
+            </FormControl>
             <input
               accept="image/*"
               style={{ display: "none" }}
               id="raised-button-file"
               multiple
+              variant="outlined"
+              margin="normal"
               type="file"
             />
             <label htmlFor="raised-button-file">
-              <Button variant="raised" component="span">
-                Upload
+              <Button
+                variant="raised"
+                component="span"
+                variant="contained"
+                color="secondary"
+                size="small"
+                className="upload-btn"
+              >
+                Upload a Profile Picture
               </Button>
             </label>
 
-            <TextField
-              id="password"
-              name="password"
-              fullWidth
-              label="Password"
-              defaultValue={this.state.password}
-            />
-
-            <Button type="submit" fullWidth variant="contained" color="primary">
-              Save Changes
-            </Button>
+            <Box className="button-box">
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              >
+                Save Changes
+              </Button>
+            </Box>
           </form>
         </div>
       </Container>

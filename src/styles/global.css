@@ -45,3 +45,15 @@ span {
   font-weight: bold;
   font-size: 1.2em;
 }
+
+.auth-container {
+  margin-top: 20px;
+}
+
+.current-users {
+  margin: 5px 0px;
+}
+
+.button-box {
+  margin-top: 10px;
+}
