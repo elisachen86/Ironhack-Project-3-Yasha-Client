@@ -24,7 +24,7 @@ export default class CardOrderStatus extends Component {
           </Typography>
         </CardContent>
         <CardActions>
-          <Button variant="contained">Not paid</Button>
+          <Button>Not paid</Button>
         </CardActions>
       </Card>
     );

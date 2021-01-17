@@ -8,7 +8,7 @@ import CloseIcon from "@material-ui/icons/Close";
 const NavOrder = (props) => {
   return (
     <div>
-      <AppBar position="static">
+      <AppBar color="textSecondary" position="static">
         <Toolbar>
           <img src="" alt="" />
           <Typography variant="h6">{props.text}</Typography>
