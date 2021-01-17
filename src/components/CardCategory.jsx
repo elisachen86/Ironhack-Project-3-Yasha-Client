@@ -7,7 +7,7 @@ import Typography from "@material-ui/core/Typography";
 
 const CardCategory = (props) => {
   return (
-    <Card>
+    <Card className="card">
       <CardContent>
         <Typography color="textSecondary" gutterBottom>
           Image

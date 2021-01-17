@@ -5,11 +5,11 @@ import Typography from "@material-ui/core/Typography";
 
 const CardDashboard = (props) => {
   return (
-    <Card>
+    <Card className="card">
       <CardContent>
-        <Typography color="textSecondary" gutterBottom>
+        {/* <Typography color="textSecondary" gutterBottom>
           Image
-        </Typography>
+        </Typography> */}
         <Typography variant="h5" component="h2">
           {props.category}
         </Typography>
