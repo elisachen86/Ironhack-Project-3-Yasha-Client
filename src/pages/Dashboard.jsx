@@ -7,6 +7,7 @@ import CardDashboard from "../components/CardDashboard";
 import CardDashboardNotif from "../components/CardDashboardNotif";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
+import { Link } from "react-router-dom"
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -19,9 +20,9 @@ class Dashboard extends Component {
   };
 
   // async componentDidMount() {
-  componentDidMount() {
-    // const data = await apiHandler.getAllOrders()
 
+    // const data = await apiHandler.getAllOrders()
+  componentDidMount() {
     const data = [
       {
         season: "y16",
@@ -88,17 +89,7 @@ class Dashboard extends Component {
         ],
       },
     ];
-    console.log(data);
 
-    // const seasonsNames = [...new Set(data.map(order => order.season))]
-    // console.log("seasons name", seasonsNames)
-
-    //   const separateOrder = data.reduce((acc, order) =>{
-    //         const price = order.items.reduce((acc, item) => acc += item.price * item.quantity , 0)
-    //         return acc[order.season]
-    //         ? [...acc[order.season], price]
-    //         : acc[order.season] = [price]
-    // }, {})
 
     function groupBySector(arg) {
       const sortedData = data.reduce((acc, obj) => {
@@ -122,6 +113,8 @@ class Dashboard extends Component {
       return result;
     }
 
+
+    console.log("here", this.props.context)
     this.setState({ orders: data, ordersBySector: groupBySector("season") });
   }
 
@@ -132,7 +125,7 @@ class Dashboard extends Component {
       return <div>Loading.....</div>;
     }
 
-    console.log(this.state.ordersBySector);
+    console.log("render", this.state.ordersBySector);
 
     return (
       <div className="dashboard-container">
@@ -161,9 +154,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="dashboard-right">
-          {/* <h3>
-          All open seasons <span>{this.state.orders.length}</span> orders<i class="fas fa-sort-down"></i>
-        </h3> */}
+
 
           <Grid item>
             <Grid item>
@@ -210,16 +201,34 @@ class Dashboard extends Component {
               total="682"
             ></CardDashboard>
 
-            {this.state.ordersBySector.map((arr) => (
+
+
+            {/* <Link to={`/dashboard/categories/${arr[0]}`} >  */}
+            {/* <Link to={{
+                          pathname: `/dashboard/categories/${arr[0]}`,
+                          state: {ordersBySector: true }
+                        }} >   */}
+
+
+            {this.state.ordersBySector.map((arr, index) => (
+             <Link to={{
+                          pathname: `/dashboard/categories/${index}`,
+                          state: {ordersBySector: true }
+                        }} >                                  
               <CardDashboard
+
+                key={index}
                 category={arr[0]}
                 orders={arr[1].length}
                 total={arr[1].reduce(
                   (accumulator, currentValue) =>
                     (accumulator += currentValue.total),
                   0
+                
                 )}
               ></CardDashboard>
+              
+              </Link>
             ))}
           </div>
         </div>

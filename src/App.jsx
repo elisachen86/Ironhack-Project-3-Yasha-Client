@@ -48,7 +48,7 @@ function App() {
             <Route exact path="/dashboard" component={Dashboard} />
             <Route
               exact
-              path="/dashboard/categories"
+              path="/dashboard/categories/:index"
               component={SeasonGeography}
             />
             <Route exact path="/dashboard/company" component={BrandRetailer} />

@@ -1,4 +1,8 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom"
+import { withUser } from "../components/Auth/withUser";
+
+
 import Button from "@material-ui/core/Button";
 import Stepper from "../components/Stepper";
 import NavSecond from "../components/NavSecond";
@@ -7,9 +11,17 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
-const SeasonGeography = () => {
+const SeasonGeography = (props) => {
+
+  console.log(props)
+
+
+  console.log(props.location.state.ordersBySector)
+
   return (
-    <div>
+  
+    <div>  
+    {/* <pre>{JSON.stringify(props, null,2)}</pre> */}
       <NavSecond text="Middle East"></NavSecond>
       <div className="catBrandContainer">
         <Grid container justify="center">
@@ -37,4 +49,4 @@ const SeasonGeography = () => {
   );
 };
 
-export default SeasonGeography;
+export default withRouter(withUser(SeasonGeography));
