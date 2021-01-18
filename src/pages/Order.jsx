@@ -6,10 +6,13 @@ import "../styles/orders.css";
 import NavOrder from "../components/NavOrder";
 import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
+// eslint-disable-next-line
 import Grid from "@material-ui/core/Grid";
 import { UserContext } from "../components/Auth/UserContext";
+// eslint-disable-next-line
 import { useRouteMatch } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
+import FormShipped from "../components/Forms/FormShipped"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,11 +57,21 @@ const Order = (props) => {
       <div className={classes.root}>
         <Stepper></Stepper>
         <CardOrderStatus order={order}></CardOrderStatus>
-        <Button color="Secondary" variant="contained">
-          Move to next step
+
+        {/* { order[0].steps[order[0].steps.length - 1].stage === "submitted"  
+          && <Button color="Secondary" variant="contained">
+          Confirm your order
         </Button>
+        } */}
+        {/* <Link exact to={{`/order/edit/${this.props.match.params.id}`}}> */}
+          <Button color="Secondary" variant="contained">
+            Mark order as shipped
+          </Button>
+        {/* </Link> */}
         <OrderMessage></OrderMessage>
         <OrderMessage></OrderMessage>
+
+        
       </div>
     </div>
   );

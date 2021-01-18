@@ -1,8 +1,4 @@
-import React , { useState, useEffect } from "react";
-import apiHandler from "../api/apiHandler";
-
-
-
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
@@ -42,9 +38,6 @@ function getSteps() {
   ];
 }
 
-
-
-
 function getStepContent(stage) {
   switch (
     stage // stage c'est l'étape
@@ -60,48 +53,21 @@ function getStepContent(stage) {
   }
 }
 
+// const getStage = (steps, stages) => {
+//   const currentStep = steps[steps.length - 1];
+  
+//   const index = stages.findIndex((stage) => {
+//     return currentStep.stage === stage;
+//   });
+//   return stages[index + 1];
+// };
+
+// module.exports = {
+//   stages,
+//   getStage,
+// };
+
 export default function HorizontalLabelPositionBelowStepper(props) {
-
-  // const [arraySteps, setArray]= useState([0,0, 0, 0, 0, 0]);
-  const [countSubmitted, setCount1] = useState(0);
-  // const [countConfirmed, setCount2] = useState(0);
-  // const [countPacked, setCount3] = useState(0);
-  // const [countReadyToShip, setCount4] = useState(0);
-  const [countShipped, setCount5] = useState(0);
-  const [countReceived, setCount6] = useState(0);
-
-
-  useEffect(async () => {
-
-    try{
-      const data  = await apiHandler.getAllOrders()
-      console.log(data)
-
-      // let [submitted, confirmed, packed, readyToShip, shipped, received] = arraySteps
-      data.forEach((arr) => {
-
-            const currentStep = arr.steps[arr.steps.length-1].stage
-            console.log(currentStep)
-            if (currentStep === "submitted") setCount1(countSubmitted+1)
-            // else if(currentStep === "confirmed") setCount2(countConfirmed+1)
-            // else if(currentStep === "packed") setCount3(countPacked+1)
-            // else if(currentStep === "ready to ship") setCount4(countReadyToShip+1)
-            else if(currentStep === "shipped") setCount5(countShipped+1)
-            else if(currentStep === "countReceived") setCount6(countReceived+1)
-        })
-
-      }catch(error){
-
-                console.log(error)
-      }
-
-  },[]);
-
-
-
-// const countfinal = [countSubmitted, countConfirmed, countPacked,countReadyToShip, countShipped, countReceived ]
-const countfinal = [countSubmitted, countShipped, countReceived ]
-
   const classes = useStyles();
   const activeStep = 0;
   const steps = getSteps();
@@ -118,16 +84,10 @@ const countfinal = [countSubmitted, countShipped, countReceived ]
         alternativeLabel
       >
         {steps.map((
-          label, index // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
+          label // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
         ) => (
           <Step key={label}>
-        
-            <StepLabel>  
-             {/* <p>{countfinal[index]}</p> */}
-             {/* <br/> */}
-             <p>{label}</p> 
-             </StepLabel>
-
+            <StepLabel>{label}</StepLabel>
           </Step>
         ))}
       </Stepper>

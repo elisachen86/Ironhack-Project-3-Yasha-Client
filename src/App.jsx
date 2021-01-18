@@ -15,6 +15,7 @@ import Order from "./pages/Order";
 
 import OrderConfirmation from "./components/Forms/FormConfirmOrder";
 import NewOrder from "./components/Forms/FormNewOrder";
+import OrderForms from './pages/OrderForms';
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -53,6 +54,7 @@ function App() {
             />
             <Route exact path="/dashboard/company" component={BrandRetailer} />
             <Route exact path="/order/new" component={NewOrder} />
+            <Route exact path="/order/edit/:id" component={OrderForms} />
             <Route exact path="/order/:id" component={Order} />
             <Route
               exact
