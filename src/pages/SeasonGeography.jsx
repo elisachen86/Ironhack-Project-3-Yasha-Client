@@ -65,11 +65,10 @@ const SeasonGeography = (props) => {
                 key={index}
                 refcode={arr._id}
                 total={arr.total}
-                amout={arr.items.reduce(
+                amount={arr.items.reduce(
                   (accumulator, currentValue) =>
                     (accumulator += currentValue.quantity),
                   0
-                
                 )}
               ></CardCategory>
               
