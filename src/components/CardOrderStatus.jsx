@@ -8,16 +8,45 @@ import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 import DescriptionIcon from "@material-ui/icons/Description";
 
 export default class CardOrderStatus extends Component {
+  
+  state = {
+
+    }
+
+    componentDidMount = () => {
+      this.setState({
+        order: this.props.order
+      })
+    }
+
+    calculateTotalCost = () => {
+      const totalCost = this.props.order[0].items.reduce((acc, item) => 
+         acc += item.price * item.quantity, 0
+      );
+      return totalCost;
+    }
+
+    calculateTotalQty = () => {
+      const totalQty = this.props.order[0].items.reduce((acc, item) => 
+         acc += item.quantity, 0
+      );
+      return totalQty;
+    }
+  
   render() {
-    return (
+    console.log("props", this.props.order); // object
+    // this.calculateTotalCost()
+    // console.log(this.calculateTotalCost());    
+    return this.props.order? (
       <Card>
         <CardContent>
-          <Typography color="textSecondary">$18,292.00</Typography>
+          <Typography color="textSecondary">${this.calculateTotalCost()}</Typography>
+          
           <Typography color="textSecondary">
-            492 units / 164 SKUs / 91 styles
+            {this.calculateTotalQty()} units 
           </Typography>
           <Typography variant="h5" component="h2">
-            <HourglassEmptyIcon></HourglassEmptyIcon>Submitted 5 days ago
+            <HourglassEmptyIcon></HourglassEmptyIcon>{this.props.order[0].steps[this.props.order[0].steps.length -1].stage} on {this.props.order[0].steps[this.props.order[0].steps.length -1].date}
           </Typography>
           <Typography color="textSecondary">
             <DescriptionIcon></DescriptionIcon>Terms and Conditions
@@ -26,7 +55,10 @@ export default class CardOrderStatus extends Component {
         <CardActions>
           <Button>Not paid</Button>
         </CardActions>
-      </Card>
+      </Card>) : (
+      <Typography component="h1" variant="h5">
+        loading
+      </Typography>
     );
   }
 }
