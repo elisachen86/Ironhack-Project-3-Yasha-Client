@@ -59,7 +59,7 @@ const SeasonGeography = (props) => {
 
 
              {ordersBySector[1].map((arr, index) => (
-              <Link to={'/dashboard'} >                                  
+              <Link to={`/order/${arr._id}`} >                                  
               <CardCategory
 
                 key={index}

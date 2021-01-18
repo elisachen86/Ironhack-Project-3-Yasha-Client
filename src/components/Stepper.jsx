@@ -31,9 +31,9 @@ function getSteps() {
   return [
     "submitted",
     "confirmed",
-    "packed",
-    "ready to ship",
-    "shipped",
+    // "packed",
+    // "ready to ship",
+    // "shipped",
     "received",
   ];
 }
@@ -52,6 +52,20 @@ function getStepContent(stage) {
       return "Unknown stepIndex";
   }
 }
+
+// const getStage = (steps, stages) => {
+//   const currentStep = steps[steps.length - 1];
+  
+//   const index = stages.findIndex((stage) => {
+//     return currentStep.stage === stage;
+//   });
+//   return stages[index + 1];
+// };
+
+// module.exports = {
+//   stages,
+//   getStage,
+// };
 
 export default function HorizontalLabelPositionBelowStepper(props) {
   const classes = useStyles();
