@@ -8,12 +8,8 @@ import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
 import Grid from "@material-ui/core/Grid";
 import { UserContext } from "../components/Auth/UserContext";
-<<<<<<< HEAD
-import apiHandler from "../api/apiHandler";
-=======
 import { useRouteMatch } from "react-router-dom";
-import apiHandler from '../api/apiHandler';
->>>>>>> bc453afa8f211c3141b1d3fb01e2d90222d26783
+import apiHandler from "../api/apiHandler";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,11 +37,11 @@ const Order = (props) => {
     //api call
     //    setOrder(data)
     // set some state
-     // use History / Location / routerMatch (exported by react router dom)
+    // use History / Location / routerMatch (exported by react router dom)
     apiHandler
-    .getOneOrder(props.match.params.id) // this.props
-    .then((apiRes) => setOrder(apiRes))
-    .catch()
+      .getOneOrder(props.match.params.id) // this.props
+      .then((apiRes) => setOrder(apiRes))
+      .catch();
   }, []);
 
   // console.log("these are the props",props);
@@ -57,7 +53,7 @@ const Order = (props) => {
       <NavOrder img="" text="Maison Colibri"></NavOrder>
       <div className={classes.root}>
         <Stepper></Stepper>
-        <CardOrderStatus order= {order}></CardOrderStatus>
+        <CardOrderStatus order={order}></CardOrderStatus>
         <Button color="Secondary" variant="contained">
           Move to next step
         </Button>
