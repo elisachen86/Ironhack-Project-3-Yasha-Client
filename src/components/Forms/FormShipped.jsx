@@ -8,10 +8,18 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
 export class FormShipped extends Component {
-  state = {};
+  state = {
+    orders : null
+  };
 
-  componentDidMount() {
-    console.log("THIS PROPS", this.props);
+   async componentDidMount() {
+     console.log("THIS PROPS THERE", this.props);
+     const data = await apiHandler.getOneOrder(this.props.match.params.id)
+     console.log("THIS IS THE DATAAA >>>", data);
+     this.setState({
+       orders: data
+     })
+     
   }
 
   handleChange = (event) => {
@@ -39,14 +47,37 @@ export class FormShipped extends Component {
     return this.props !== null ? (
       <Container component="main" maxWidth="xs" className="auth-container">
         <div>
-          <Typography
+          
+          {/* {  this.props.order.steps[this.props.order.steps.length - 1].stage === "shipped" && */}
+                {/* <FormReceived></FormReceived> */}
+            {/* } */}
+            {/* {  this.props.order.steps[this.props.order.steps.length - 1].stage === "shipped" && */}
+<Typography
             align="center"
             component="h1"
             variant="h5"
             gutterBottom="true"
           >
-            Is your order ready to ship?
-          </Typography>
+
+                Is your order ready to ship?
+</Typography>
+
+            {/* } */}
+
+            {/* {  this.props.order.steps[this.props.order.steps.length - 1].stage === "received" && */}
+<Typography
+            align="center"
+            component="h1"
+            variant="h5"
+            gutterBottom="true"
+          >
+
+                Has your received your shipment?
+</Typography>
+
+            {/* } */}
+            
+          
           <form
             onSubmit={this.handleSubmit}
             onChange={this.handleChange}

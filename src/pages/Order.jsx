@@ -12,7 +12,6 @@ import { UserContext } from "../components/Auth/UserContext";
 // eslint-disable-next-line
 import { useRouteMatch } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
-import FormShipped from "../components/Forms/FormShipped";
 import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
@@ -50,7 +49,7 @@ const Order = (props) => {
 
   // console.log("these are the props",props);
   // console.log("route match", props.match.params.id);
-  // console.log("ORDER", order);
+   console.log("ORDER", order);
 
   return (
     <div>
@@ -64,11 +63,31 @@ const Order = (props) => {
           Confirm your order
         </Button>
         } */}
-        <Link exact to={`/order/edit/${props.match.params.id}`}>
-          <Button color="Secondary" variant="contained">
-            Mark order as shipped
-          </Button>
-        </Link>
+
+
+        {/* {  order.steps[order.steps.length - 1].stage === "shipped" && */}
+              {/* <Link exact to={`/order/edit/${props.match.params.id}`}>
+                <Button color="Secondary" variant="contained">
+                  Mark order as shipped
+                </Button>
+              </Link> */}
+            {/* } */}
+
+       
+              <Link exact to={`/order/edit/${props.match.params.id}`}>
+                 
+                <Button color="Secondary" variant="contained">
+                  Mark order as shipped
+                </Button>
+                  
+                  
+                <Button color="Secondary" variant="contained">
+                  Mark order as received
+                </Button>
+                  
+              </Link>
+        
+        
         <OrderMessage></OrderMessage>
         <OrderMessage></OrderMessage>
       </div>

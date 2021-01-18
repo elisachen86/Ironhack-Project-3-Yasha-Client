@@ -90,14 +90,15 @@ const NavMain = (props) => {
                     size="small"
                     onClick={handleClick}
                   >
-                    {/* {context.user && ( */}
+                    {context.user && (
                     <Avatar
                       alt={context.user.firstName}
                       src={context.user.avatar}
                       className={classes.small}
                     ></Avatar>
+                 
+                  )} 
                   </Button>
-                  {/* )} */}
                   <Menu
                     id="simple-menu"
                     anchorEl={anchorEl}
