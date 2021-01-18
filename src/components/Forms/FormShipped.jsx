@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import apiHandler from "../../api/apiHandler";
-import {withRouter} from 'react-router-dom';
+import { withRouter } from "react-router-dom";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -8,13 +8,10 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
 export class FormShipped extends Component {
-  state = {
-    
-  };
+  state = {};
 
   componentDidMount() {
     console.log("THIS PROPS", this.props);
-    
   }
 
   handleChange = (event) => {
@@ -29,18 +26,16 @@ export class FormShipped extends Component {
 
     apiHandler
       .updateOneOrder(this.props.match.params.id)
-      .getOneOrder(this.props.match.params.id)
       .then((data) => {
+        apiHandler.getOneOrder(this.props.match.params.id);
         this.props.history.push(`/order/${this.props.match.params.id}`);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-  
-  
+
   render() {
-     
     return this.props !== null ? (
       <Container component="main" maxWidth="xs" className="auth-container">
         <div>
@@ -83,8 +78,7 @@ export class FormShipped extends Component {
           </form>
         </div>
       </Container>
-    ) 
-    : (
+    ) : (
       <Typography component="h1" variant="h5">
         loading
       </Typography>

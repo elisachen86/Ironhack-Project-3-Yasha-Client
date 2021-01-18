@@ -12,7 +12,8 @@ import { UserContext } from "../components/Auth/UserContext";
 // eslint-disable-next-line
 import { useRouteMatch } from "react-router-dom";
 import apiHandler from "../api/apiHandler";
-import FormShipped from "../components/Forms/FormShipped"
+import FormShipped from "../components/Forms/FormShipped";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -63,15 +64,13 @@ const Order = (props) => {
           Confirm your order
         </Button>
         } */}
-        {/* <Link exact to={{`/order/edit/${this.props.match.params.id}`}}> */}
+        <Link exact to={`/order/edit/${props.match.params.id}`}>
           <Button color="Secondary" variant="contained">
             Mark order as shipped
           </Button>
-        {/* </Link> */}
+        </Link>
         <OrderMessage></OrderMessage>
         <OrderMessage></OrderMessage>
-
-        
       </div>
     </div>
   );

@@ -15,7 +15,7 @@ import Order from "./pages/Order";
 
 import OrderConfirmation from "./components/Forms/FormConfirmOrder";
 import NewOrder from "./components/Forms/FormNewOrder";
-import OrderForms from './pages/OrderForms';
+import OrderForms from "./pages/OrderForms";
 
 import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
@@ -46,17 +46,25 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route exact path="/signin" component={Signin} />
             <Route exact path="/signup" component={Signup} />
-            <Route exact path="/dashboard" component={Dashboard} />
-            <Route
+            <ProtectedRoute exact path="/dashboard" component={Dashboard} />
+            <ProtectedRoute
               exact
               path="/dashboard/categories/:index"
               component={SeasonGeography}
             />
-            <Route exact path="/dashboard/company" component={BrandRetailer} />
-            <Route exact path="/order/new" component={NewOrder} />
-            <Route exact path="/order/edit/:id" component={OrderForms} />
-            <Route exact path="/order/:id" component={Order} />
-            <Route
+            <ProtectedRoute
+              exact
+              path="/dashboard/company"
+              component={BrandRetailer}
+            />
+            <ProtectedRoute exact path="/order/new" component={NewOrder} />
+            <ProtectedRoute
+              exact
+              path="/order/edit/:id"
+              component={OrderForms}
+            />
+            <ProtectedRoute exact path="/order/:id" component={Order} />
+            <ProtectedRoute
               exact
               path="/order/confirmation"
               component={OrderConfirmation}

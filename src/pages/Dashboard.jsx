@@ -7,7 +7,7 @@ import CardDashboard from "../components/CardDashboard";
 import CardDashboardNotif from "../components/CardDashboardNotif";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -20,9 +20,8 @@ class Dashboard extends Component {
   };
 
   async componentDidMount() {
-
-    const data = await apiHandler.getAllOrders()
-  // componentDidMount() {
+    const data = await apiHandler.getAllOrders();
+    // componentDidMount() {
     // const data = [
     //   {
     //     season: "y16",
@@ -90,7 +89,7 @@ class Dashboard extends Component {
     //   },
     // ];
 
-    console.log(data)
+    console.log(data);
     function groupBySector(arg) {
       const sortedData = data.reduce((acc, obj) => {
         obj.total = obj.items.reduce(
@@ -113,29 +112,33 @@ class Dashboard extends Component {
       return result;
     }
 
-    function groupBySteps(){
-
+    function groupBySteps() {
       const statusCheck = {
-           submitted: 0,
-            shipped: 0,
-            received: 0
-      }
+        submitted: 0,
+        shipped: 0,
+        received: 0,
+      };
 
       data.forEach((arr) => {
+        const currentStep = arr.steps[arr.steps.length - 1].stage;
+        if (currentStep === "submitted")
+          statusCheck.submitted = statusCheck.submitted + 1;
+        else if (currentStep === "shipped")
+          statusCheck.shipped = statusCheck.shipped + 1;
+        else if (currentStep === "received")
+          statusCheck.received = statusCheck.received + 1;
+      });
 
-          const currentStep = arr.steps[arr.steps.length-1].stage
-          if (currentStep === "submitted") statusCheck.submitted = statusCheck.submitted +1
-          else if(currentStep === "shipped") statusCheck.shipped = statusCheck.shipped +1
-          else if(currentStep === "received") statusCheck.sreceived = statusCheck.shipped +1
-
-      })
-
-        return statusCheck
+      return statusCheck;
     }
     // console.log("here", this.props.context)
 
-    console.log(groupBySteps())
-    this.setState({ orders: data, ordersBySector: groupBySector("season"), steps: groupBySteps()});
+    console.log(groupBySteps());
+    this.setState({
+      orders: data,
+      ordersBySector: groupBySector("season"),
+      steps: groupBySteps(),
+    });
   }
 
   render() {
@@ -174,8 +177,6 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="dashboard-right">
-
-
           <Grid item>
             <Grid item>
               <Typography variant="h5" color="textSecondary" gutterBottom>
@@ -199,13 +200,12 @@ class Dashboard extends Component {
 
           <Stepper></Stepper>
 
-
-            <Grid item>
-              <Typography variant="h5" color="textSecondary" gutterBottom>
-                steps: submitted: {this.state.steps.submitted}, shipped: {this.state.steps.shipped}, received: {this.state.steps.received}
-              </Typography>
-            </Grid>
-
+          <Grid item>
+            <Typography variant="h5" color="textSecondary" gutterBottom>
+              steps: submitted: {this.state.steps.submitted}, shipped:{" "}
+              {this.state.steps.shipped}, received: {this.state.steps.received}
+            </Typography>
+          </Grid>
 
           <div className="dashboard-scrollbox">
             {/* <CardDashboard
@@ -234,24 +234,23 @@ class Dashboard extends Component {
                           state: {ordersBySector: true }
                         }} >   */}
 
-
             {this.state.ordersBySector.map((arr, index) => (
-             <Link to={{
-                          pathname: `/dashboard/categories/${index}`,
-                          state: {ordersBySector: this.state.ordersBySector[index] }
-                        }} >                                  
-               <CardDashboard
-
-                key={index}
-                category={arr[0]}
-                orders={arr[1].length}
-                total={arr[1].reduce(
-                  (accumulator, currentValue) =>
-                    (accumulator += currentValue.total),
-                  0    
-                )}
-              ></CardDashboard>
-              
+              <Link
+                to={{
+                  pathname: `/dashboard/categories/${index}`,
+                  state: { ordersBySector: this.state.ordersBySector[index] },
+                }}
+              >
+                <CardDashboard
+                  key={index}
+                  category={arr[0]}
+                  orders={arr[1].length}
+                  total={arr[1].reduce(
+                    (accumulator, currentValue) =>
+                      (accumulator += currentValue.total),
+                    0
+                  )}
+                ></CardDashboard>
               </Link>
             ))}
           </div>
