@@ -7,6 +7,7 @@ import CardDashboard from "../components/CardDashboard";
 import CardDashboardNotif from "../components/CardDashboardNotif";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
+import { Link } from "react-router-dom"
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -18,88 +19,78 @@ class Dashboard extends Component {
     ordersBySector: null,
   };
 
-  // async componentDidMount() {
-  componentDidMount() {
-    // const data = await apiHandler.getAllOrders()
+  async componentDidMount() {
 
-    const data = [
-      {
-        season: "y16",
-        items: [
-          { price: 1, quantity: 40 },
-          { price: 3, quantity: 90 },
-          { price: 5, quantity: 100 },
-        ],
-      },
-      {
-        season: "y16",
-        items: [
-          { price: 4, quantity: 20 },
-          { price: 3, quantity: 90 },
-          { price: 5, quantity: 70 },
-        ],
-      },
-      {
-        season: "y16",
-        items: [
-          { price: 6, quantity: 20 },
-          { price: 3, quantity: 90 },
-          { price: 5, quantity: 50 },
-        ],
-      },
-      {
-        season: "y17",
-        items: [
-          { price: 9, quantity: 20 },
-          { price: 6, quantity: 90 },
-          { price: 5, quantity: 50 },
-        ],
-      },
-      {
-        season: "y17",
-        items: [
-          { price: 5, quantity: 20 },
-          { price: 2, quantity: 90 },
-          { price: 5, quantity: 200 },
-        ],
-      },
-      {
-        season: "y17",
-        items: [
-          { price: 5, quantity: 20 },
-          { price: 9, quantity: 90 },
-          { price: 5, quantity: 400 },
-        ],
-      },
-      {
-        season: "y18",
-        items: [
-          { price: 10, quantity: 20 },
-          { price: 28, quantity: 90 },
-          { price: 5, quantity: 200 },
-        ],
-      },
-      {
-        season: "y18",
-        items: [
-          { price: 5, quantity: 20 },
-          { price: 30, quantity: 90 },
-          { price: 40, quantity: 400 },
-        ],
-      },
-    ];
-    console.log(data);
+    const data = await apiHandler.getAllOrders()
+  // componentDidMount() {
+    // const data = [
+    //   {
+    //     season: "y16",
+    //     items: [
+    //       { price: 1, quantity: 40 },
+    //       { price: 3, quantity: 90 },
+    //       { price: 5, quantity: 100 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y16",
+    //     items: [
+    //       { price: 4, quantity: 20 },
+    //       { price: 3, quantity: 90 },
+    //       { price: 5, quantity: 70 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y16",
+    //     items: [
+    //       { price: 6, quantity: 20 },
+    //       { price: 3, quantity: 90 },
+    //       { price: 5, quantity: 50 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y17",
+    //     items: [
+    //       { price: 9, quantity: 20 },
+    //       { price: 6, quantity: 90 },
+    //       { price: 5, quantity: 50 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y17",
+    //     items: [
+    //       { price: 5, quantity: 20 },
+    //       { price: 2, quantity: 90 },
+    //       { price: 5, quantity: 200 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y17",
+    //     items: [
+    //       { price: 5, quantity: 20 },
+    //       { price: 9, quantity: 90 },
+    //       { price: 5, quantity: 400 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y18",
+    //     items: [
+    //       { price: 10, quantity: 20 },
+    //       { price: 28, quantity: 90 },
+    //       { price: 5, quantity: 200 },
+    //     ],
+    //   },
+    //   {
+    //     season: "y18",
+    //     items: [
+    //       { price: 5, quantity: 20 },
+    //       { price: 30, quantity: 90 },
+    //       { price: 40, quantity: 400 },
+    //     ],
+    //   },
+    // ];
 
-    // const seasonsNames = [...new Set(data.map(order => order.season))]
-    // console.log("seasons name", seasonsNames)
-
-    //   const separateOrder = data.reduce((acc, order) =>{
-    //         const price = order.items.reduce((acc, item) => acc += item.price * item.quantity , 0)
-    //         return acc[order.season]
-    //         ? [...acc[order.season], price]
-    //         : acc[order.season] = [price]
-    // }, {})
-
+    console.log(data)
     function groupBySector(arg) {
       const sortedData = data.reduce((acc, obj) => {
         obj.total = obj.items.reduce(
@@ -122,7 +113,29 @@ class Dashboard extends Component {
       return result;
     }
 
-    this.setState({ orders: data, ordersBySector: groupBySector("season") });
+    function groupBySteps(){
+
+      const statusCheck = {
+           submitted: 0,
+            shipped: 0,
+            received: 0
+      }
+
+      data.forEach((arr) => {
+
+          const currentStep = arr.steps[arr.steps.length-1].stage
+          if (currentStep === "submitted") statusCheck.submitted = statusCheck.submitted +1
+          else if(currentStep === "shipped") statusCheck.shipped = statusCheck.shipped +1
+          else if(currentStep === "received") statusCheck.sreceived = statusCheck.shipped +1
+
+      })
+
+        return statusCheck
+    }
+    // console.log("here", this.props.context)
+
+    console.log(groupBySteps())
+    this.setState({ orders: data, ordersBySector: groupBySector("season"), steps: groupBySteps()});
   }
 
   render() {
@@ -132,7 +145,7 @@ class Dashboard extends Component {
       return <div>Loading.....</div>;
     }
 
-    console.log(this.state.ordersBySector);
+    // console.log("render", this.state.ordersBySector);
 
     return (
       <div className="dashboard-container">
@@ -161,9 +174,7 @@ class Dashboard extends Component {
           </div>
         </div>
         <div className="dashboard-right">
-          {/* <h3>
-          All open seasons <span>{this.state.orders.length}</span> orders<i class="fas fa-sort-down"></i>
-        </h3> */}
+
 
           <Grid item>
             <Grid item>
@@ -188,6 +199,14 @@ class Dashboard extends Component {
 
           <Stepper></Stepper>
 
+
+            <Grid item>
+              <Typography variant="h5" color="textSecondary" gutterBottom>
+                steps: received: {this.state.steps.received}, shipped: {this.state.steps.shipped}, submitted: {this.state.steps.submitted}
+              </Typography>
+            </Grid>
+
+
           <div className="dashboard-scrollbox">
             <CardDashboard
               category="Middle East"
@@ -210,16 +229,33 @@ class Dashboard extends Component {
               total="682"
             ></CardDashboard>
 
-            {this.state.ordersBySector.map((arr) => (
-              <CardDashboard
+
+
+            {/* <Link to={{
+                          pathname: `/dashboard/categories/${arr[0]}`,
+                          state: {ordersBySector: true }
+                        }} >   */}
+
+
+            {this.state.ordersBySector.map((arr, index) => (
+             <Link to={{
+                          pathname: `/dashboard/categories/${index}`,
+                          state: {ordersBySector: this.state.ordersBySector[index] }
+                        }} >                                  
+               <CardDashboard
+
+                key={index}
                 category={arr[0]}
                 orders={arr[1].length}
                 total={arr[1].reduce(
                   (accumulator, currentValue) =>
                     (accumulator += currentValue.total),
                   0
+                
                 )}
               ></CardDashboard>
+              
+              </Link>
             ))}
           </div>
         </div>
