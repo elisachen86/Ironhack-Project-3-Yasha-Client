@@ -112,32 +112,31 @@ class Dashboard extends Component {
       return result;
     }
 
-    function groupBySteps() {
-      const statusCheck = {
-        submitted: 0,
-        shipped: 0,
-        received: 0,
-      };
+    // function groupBySteps() {
+    //   const statusCheck = {
+    //     submitted: 0,
+    //     shipped: 0,
+    //     received: 0,
+    //   };
 
-      data.forEach((arr) => {
-        const currentStep = arr.steps[arr.steps.length - 1].stage;
-        if (currentStep === "submitted")
-          statusCheck.submitted = statusCheck.submitted + 1;
-        else if (currentStep === "shipped")
-          statusCheck.shipped = statusCheck.shipped + 1;
-        else if (currentStep === "received")
-          statusCheck.received = statusCheck.received + 1;
-      });
+    //   data.forEach((arr) => {
+    //     const currentStep = arr.steps[arr.steps.length - 1].stage;
+    //     if (currentStep === "submitted")
+    //       statusCheck.submitted = statusCheck.submitted + 1;
+    //     else if (currentStep === "shipped")
+    //       statusCheck.shipped = statusCheck.shipped + 1;
+    //     else if (currentStep === "received")
+    //       statusCheck.received = statusCheck.received + 1;
+    //   });
 
-      return statusCheck;
-    }
+    //   return statusCheck;
+    // }
     // console.log("here", this.props.context)
 
-    console.log(groupBySteps());
     this.setState({
       orders: data,
       ordersBySector: groupBySector("season"),
-      steps: groupBySteps(),
+      // steps: groupBySteps(),
     });
   }
 
@@ -200,12 +199,12 @@ class Dashboard extends Component {
 
           <Stepper></Stepper>
 
-          <Grid item>
+          {/* <Grid item>
             <Typography variant="h5" color="textSecondary" gutterBottom>
               steps: submitted: {this.state.steps.submitted}, shipped:{" "}
               {this.state.steps.shipped}, received: {this.state.steps.received}
             </Typography>
-          </Grid>
+          </Grid> */}
 
           <div className="dashboard-scrollbox">
             {/* <CardDashboard
