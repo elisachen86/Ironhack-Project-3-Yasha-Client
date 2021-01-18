@@ -21,7 +21,8 @@ import "../styles/NavMain.css";
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
-      margin: theme.spacing(1),
+      margin: theme.spacing(0),
+      // minWidth: "0px",
     },
   },
   small: {
@@ -73,14 +74,14 @@ const NavMain = (props) => {
             <React.Fragment>
               <Grid container justify="center" className={classes.root}>
                 <Grid>
-                  {/* <Button color="primary"> */}
-                  <SearchIcon></SearchIcon>
-                  {/* </Button> */}
+                  <Button color="secondary">
+                    <SearchIcon></SearchIcon>
+                  </Button>
                 </Grid>
                 <Grid>
-                  {/* <Button color="primary"> */}
-                  <NotificationsIcon></NotificationsIcon>
-                  {/* </Button> */}
+                  <Button color="secondary">
+                    <NotificationsIcon></NotificationsIcon>
+                  </Button>
                 </Grid>
                 <Grid>
                   <Button

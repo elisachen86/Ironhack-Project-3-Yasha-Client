@@ -69,6 +69,14 @@ span {
   margin: 10px;
 }
 
+header .MuiGrid-container {
+  width: unset !important; /* !important overides the property with the same class */
+}
+
+header .MuiButton-root {
+  min-width: 12px !important;
+}
+
 @media (min-width: 900px) {
   .dashboard-container {
     display: grid;

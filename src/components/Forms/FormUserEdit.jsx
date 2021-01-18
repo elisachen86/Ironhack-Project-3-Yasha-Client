@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router";
 import { withUser } from "../Auth/withUser";
 import apiHandler from "../../api/apiHandler";
 
@@ -40,13 +41,13 @@ export class FormUserEdit extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
-    const { authContext } = this.props;
+    const { context } = this.props;
 
     apiHandler
       .editUserInfo(this.state)
       .then((data) => {
-        authContext.setUser(data);
-        this.props.history.push("/profile");
+        context.setUser(data);
+        this.props.history.push("/dashboard");
       })
       .catch((error) => {
         console.log(error);
@@ -54,7 +55,7 @@ export class FormUserEdit extends Component {
   };
 
   render() {
-    // console.log(this.props);
+    console.log(this.props);
     return this.state.firstName ? (
       <Container component="main" maxWidth="xs" className="auth-container">
         <div>
@@ -192,4 +193,4 @@ export class FormUserEdit extends Component {
   }
 }
 
-export default withUser(FormUserEdit);
+export default withRouter(withUser(FormUserEdit));
