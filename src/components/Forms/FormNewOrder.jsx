@@ -1,33 +1,83 @@
 // Corresponding Figma View: "New order sheet parsed"
 
 import React, { Component } from 'react';
+import apiHandler from '../../api/apiHandler';
+import { UserContext } from "../Auth/UserContext";
 
 export default class NewOrder extends Component {
+
+    static contextType = UserContext;
+
+    state = {
+     users : [],
+     steps: [
+         {
+             stage : "submitted",
+             date: new Date()
+     }]
+   
+    };
+
+    // componentDidMount = () => {
+    //     this.setState({
+    //         users : this.context.user
+    //     })
+    // }
+  
+    handleChange = (event) => {
+      const value = event.target.value;
+      const key = event.target.name;
+  
+      this.setState({ [key]: value });
+     
+    }
+
+    handleSubmit = (event) => {
+      event.preventDefault();
+      this.state.users.push(this.context.user._id)
+
+      apiHandler
+        .createOneOrder(this.state)
+        .then((data) => {
+            this.props.history.push("/order/" + data._id)
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+
+        
+    };
+
     render() {
+        // console.log("CONTEXTTYPE", this.context.user._id);
+        
         return (
             <div>
                 <i class="fas fa-long-arrow-alt-left"></i> <h1>New Order</h1>
 
-                <form action="">
+                <form onSubmit={this.handleSubmit}>
                     <label htmlFor="">Order name:</label>
-                    <input type="text" placeholder="BALR FW20"/>
+                    <input onChange={this.handleChange} name="name" type="text" placeholder="BALR FW20"/>
 
-                    <label htmlFor="">Client: </label>
-                    <input type="text" placeholder="Maison Plisson"/>
+                    <label htmlFor="">Order number:</label>
+                    <input onChange={this.handleChange} name="number" type="text" placeholder="PO168451"/>
 
-                    {/* Currency (will have to be displayed inline with the client input?) */}
-                    <input type="text" placeholder="EUR"/>
+                    {/* <label htmlFor="">Retailer company: </label> */}
+                    {/* <input onChange={this.handleChange} name="retailerCompany" type="text" placeholder="Maison Plisson"/> */}
+
+                    <label htmlFor="">Currency: </label>
+                    <input onChange={this.handleChange} name="currency" type="text" placeholder="EUR"/>
 
                     <label htmlFor="">Date</label>
-                    <input type="text" placeholder="20/06/2020"/>
+                    <input onChange={this.handleChange} name="date" type="Date" placeholder="20/06/2020"/>
 
                     <label htmlFor="">Season</label>
-                    <input type="text" placeholder="FW20"/>
+                    <input onChange={this.handleChange} name="season" type="text" placeholder="FW20"/>
 
                     <label htmlFor="">Category</label>
-                    <input type="text" placeholder="Pasta"/>
+                    <input onChange={this.handleChange} name="category" type="text" placeholder="Pasta"/>
 
-                    <button>Validate import</button>
+                    <button>Submit New order</button>
                     {/* note: this button will be placed at the end of the screen (cf. figma) w/ css */}
                 </form>
 
