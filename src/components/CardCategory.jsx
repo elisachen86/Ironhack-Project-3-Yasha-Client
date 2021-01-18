@@ -13,10 +13,10 @@ const CardCategory = (props) => {
           Image
         </Typography> */}
         <Typography variant="h5" component="h2">
-          {props.geography}
+          {props.refcode}
         </Typography>
         <Typography color="textSecondary">
-          {props.orders} orders - ${props.amount}k
+          $ {props.total} - {props.amount} units
         </Typography>
       </CardContent>
       <CardActions>{/* <Button size="small">See more</Button> */}</CardActions>
