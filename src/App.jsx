@@ -52,8 +52,8 @@ function App() {
               component={SeasonGeography}
             />
             <Route exact path="/dashboard/company" component={BrandRetailer} />
-            <Route exact path="/order/:id" component={Order} />
             <Route exact path="/order/new" component={NewOrder} />
+            <Route exact path="/order/:id" component={Order} />
             <Route
               exact
               path="/order/confirmation"
