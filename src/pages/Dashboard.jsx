@@ -202,13 +202,13 @@ class Dashboard extends Component {
 
             <Grid item>
               <Typography variant="h5" color="textSecondary" gutterBottom>
-                steps: received: {this.state.steps.received}, shipped: {this.state.steps.shipped}, submitted: {this.state.steps.submitted}
+                steps: submitted: {this.state.steps.submitted}, shipped: {this.state.steps.shipped}, received: {this.state.steps.received}
               </Typography>
             </Grid>
 
 
           <div className="dashboard-scrollbox">
-            <CardDashboard
+            {/* <CardDashboard
               category="Middle East"
               orders="34"
               total="414"
@@ -227,9 +227,7 @@ class Dashboard extends Component {
               category="North America"
               orders="51"
               total="682"
-            ></CardDashboard>
-
-
+            ></CardDashboard> */}
 
             {/* <Link to={{
                           pathname: `/dashboard/categories/${arr[0]}`,
@@ -250,8 +248,7 @@ class Dashboard extends Component {
                 total={arr[1].reduce(
                   (accumulator, currentValue) =>
                     (accumulator += currentValue.total),
-                  0
-                
+                  0    
                 )}
               ></CardDashboard>
               

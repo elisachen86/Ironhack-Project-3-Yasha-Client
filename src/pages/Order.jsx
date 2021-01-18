@@ -9,7 +9,7 @@ import OrderMessage from "../components/OrderMessage";
 import Grid from "@material-ui/core/Grid";
 import { UserContext } from "../components/Auth/UserContext";
 import { useRouteMatch } from "react-router-dom";
-import apiHandler from '../api/apiHandler';
+import apiHandler from "../api/apiHandler";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,14 +33,15 @@ const Order = (props) => {
 
   // use effect with [] is the equivalent of componentDidMount
   useEffect(() => {
+    // apiHandler.getOneOrder(req.params.id);
     //api call
     //    setOrder(data)
     // set some state
-     // use History / Location / routerMatch (exported by react router dom)
+    // use History / Location / routerMatch (exported by react router dom)
     apiHandler
-    .getOneOrder(props.match.params.id) // this.props
-    .then((apiRes) => setOrder(apiRes))
-    .catch()
+      .getOneOrder(props.match.params.id) // this.props
+      .then((apiRes) => setOrder(apiRes))
+      .catch();
   }, []);
 
   // console.log("these are the props",props);
@@ -52,7 +53,7 @@ const Order = (props) => {
       <NavOrder img="" text="Maison Colibri"></NavOrder>
       <div className={classes.root}>
         <Stepper></Stepper>
-        <CardOrderStatus order= {order}></CardOrderStatus>
+        <CardOrderStatus order={order}></CardOrderStatus>
         <Button color="Secondary" variant="contained">
           Move to next step
         </Button>
