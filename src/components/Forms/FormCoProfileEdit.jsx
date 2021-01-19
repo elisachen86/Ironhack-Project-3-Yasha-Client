@@ -3,7 +3,6 @@ import { withUser } from "../Auth/withUser";
 import apiHandler from "../../api/apiHandler";
 
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -13,6 +12,8 @@ import Select from "@material-ui/core/Select";
 import FormControl from "@material-ui/core/FormControl";
 import Grid from "@material-ui/core/Grid";
 import Avatar from "@material-ui/core/Avatar";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
 
 export class FormCoProfileEdit extends Component {
   state = {};
@@ -80,7 +81,6 @@ export class FormCoProfileEdit extends Component {
               value={this.state.name}
               onChange={this.handleChange}
             />
-
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel shrink="true" id="companyType">
                 Company Type
@@ -97,7 +97,6 @@ export class FormCoProfileEdit extends Component {
                 <MenuItem value="brand">Brand</MenuItem>
               </Select>
             </FormControl>
-
             <TextField
               id="email"
               name="email"
@@ -148,7 +147,7 @@ export class FormCoProfileEdit extends Component {
               value={this.state.billingAddress}
               onChange={this.handleChange}
             />
-            <Typography variant="h6">Current users</Typography>
+            <Typography variant="h6">Current users</Typography>{" "}
             {this.state.userList.map((user) => {
               return (
                 <Grid container alignItems="center" className="current-users">
@@ -159,7 +158,14 @@ export class FormCoProfileEdit extends Component {
                 </Grid>
               );
             })}
-
+            <Fab
+              variant="extend"
+              color="secondary"
+              aria-label="add"
+              size="medium"
+            >
+              <AddIcon /> Add user
+            </Fab>
             <Button type="submit" fullWidth variant="contained" color="primary">
               Save changes
             </Button>

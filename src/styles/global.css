@@ -77,6 +77,10 @@ header .MuiButton-root {
   min-width: 12px !important;
 }
 
+.MuiButtonBase-root {
+  margin: 10px 0px !important;
+}
+
 @media (min-width: 900px) {
   .dashboard-container {
     display: grid;
