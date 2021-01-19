@@ -1,17 +1,17 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Fab from '@material-ui/core/Fab';
-import AddIcon from '@material-ui/icons/Add';
-import '../styles/dashboard.css';
+import React from "react";
+import { makeStyles } from "@material-ui/core/styles";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from "@material-ui/icons/Add";
+import "../styles/dashboard.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    '& > *': {
+    "& > *": {
       margin: theme.spacing(1),
       position: "absolute",
       top: "5rem",
       right: "0.8rem",
-      zIndex: '100'
+      zIndex: "100",
     },
   },
   extendedIcon: {
@@ -24,11 +24,8 @@ export default function FloatingActionButtons() {
 
   return (
     <div className={classes.root}>
-      <Fab 
-      color="secondary"
-      aria-label="add"
-      >
-        <AddIcon/>
+      <Fab color="secondary" aria-label="add">
+        <AddIcon />
       </Fab>
     </div>
   );
