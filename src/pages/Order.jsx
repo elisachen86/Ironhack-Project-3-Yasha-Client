@@ -1,18 +1,22 @@
 import React, { useContext, useState, useEffect } from "react";
-import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
-import Stepper from "../components/Stepper";
+import { Link } from "react-router-dom";
+// eslint-disable-next-line
+import { useRouteMatch } from "react-router-dom";
 import "../styles/orders.css";
+
+import apiHandler from "../api/apiHandler";
+import Stepper from "../components/Stepper";
 import NavOrder from "../components/NavOrder";
 import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
-// eslint-disable-next-line
-import Grid from "@material-ui/core/Grid";
+import Loading from '../components/Loading';
 import { UserContext } from "../components/Auth/UserContext";
+
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
 // eslint-disable-next-line
-import { useRouteMatch } from "react-router-dom";
-import apiHandler from "../api/apiHandler";
-import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid"
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -24,75 +28,62 @@ const useStyles = makeStyles((theme) => ({
 
 const Order = (props) => {
   const classes = useStyles();
-  const myContextValue = useContext(UserContext);
-
-  // state= {
-  //   count: 0,
-  //   order: null
-  // }
+  useContext(UserContext);
 
   const [order, setOrder] = useState(null);
+  // eslint-disable-next-line
   const [count, setCount] = useState(0);
 
-  // use effect with [] is the equivalent of componentDidMount
   useEffect(() => {
-    // apiHandler.getOneOrder(req.params.id);
-    //api call
-    //    setOrder(data)
-    // set some state
-    // use History / Location / routerMatch (exported by react router dom)
+    
     apiHandler
       .getOneOrder(props.match.params.id) // this.props
       .then((apiRes) => setOrder(apiRes))
       .catch();
   }, []);
 
-  // console.log("these are the props",props);
-  // console.log("route match", props.match.params.id);
-   console.log("ORDER", order);
+  // console.log("Order.jsx - props",props);
+  // console.log("Order.jsx - props.match.params.id", props.match.params.id);
+  // console.log("Order.jsx - order", order);
 
-  return (
+  return order !== null? (
     <div>
       <NavOrder img="" text="Maison Colibri"></NavOrder>
       <div className={classes.root}>
         <Stepper></Stepper>
         <CardOrderStatus order={order}></CardOrderStatus>
 
-        {/* { order[0].steps[order[0].steps.length - 1].stage === "submitted"  
-          && <Button color="Secondary" variant="contained">
-          Confirm your order
-        </Button>
-        } */}
-
-
-        {/* {  order.steps[order.steps.length - 1].stage === "shipped" && */}
-              {/* <Link exact to={`/order/edit/${props.match.params.id}`}>
-                <Button color="Secondary" variant="contained">
-                  Mark order as shipped
-                </Button>
-              </Link> */}
-            {/* } */}
+            {  order[0].steps[order[0].steps.length-1].stage === "received" &&
+            <Typography component="h1" variant="h5">
+                Order completed
+            </Typography>
+            }
 
        
-              <Link exact to={`/order/edit/${props.match.params.id}`}>
-                 
-                <Button color="Secondary" variant="contained">
+            <Link exact to={`/order/edit/${props.match.params.id}`}>
+
+              { order[0].steps[order[0].steps.length-1].stage === "submitted" &&
+                 <Button color="Secondary" variant="contained">
                   Mark order as shipped
-                </Button>
-                  
-                  
-                <Button color="Secondary" variant="contained">
+                 </Button>
+              }
+
+              {  order[0].steps[order[0].steps.length-1].stage === "shipped" &&
+                 <Button color="Secondary" variant="contained">
                   Mark order as received
-                </Button>
-                  
-              </Link>
+                 </Button>
+              }
+
+            </Link>
         
         
         <OrderMessage></OrderMessage>
         <OrderMessage></OrderMessage>
       </div>
     </div>
-  );
+  ) : (
+    <Loading></Loading>
+  )
 };
 
 export default Order;

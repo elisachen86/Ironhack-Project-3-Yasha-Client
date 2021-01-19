@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import apiHandler from "../../api/apiHandler";
 import { withRouter } from "react-router-dom";
+import Loading from '../Loading';
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -8,34 +8,11 @@ import Container from "@material-ui/core/Container";
 import Box from "@material-ui/core/Box";
 
 export class FormReceived extends Component {
-  state = {};
-
-  componentDidMount() {
-    console.log("Form Received - Props", this.props);
-  }
-
-  handleChange = (event) => {
-    const value = event.target.value;
-    const key = event.target.name;
-
-    this.setState({ [key]: value });
-  };
-
-  handleSubmit = (event) => {
-    event.preventDefault();
-
-    // apiHandler
-    //   .updateOneOrder(this.props.match.params.id)
-    //   .then((data) => {
-    //     apiHandler.getOneOrder(this.props.match.params.id);
-    //     this.props.history.push(`/order/${this.props.match.params.id}`);
-    //   })
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-  };
 
   render() {
+
+    // console.log("Form Received - Props", this.props);
+
     return this.props !== null ? (
       <Container component="main" maxWidth="xs" className="auth-container">
         <div>
@@ -48,15 +25,15 @@ export class FormReceived extends Component {
             Has your order arrived?
           </Typography>
           <form
-            onSubmit={this.handleSubmit}
-            onChange={this.handleChange}
+            onSubmit={this.props.handleSubmit}
+            onChange={this.props.handleChange}
             noValidate
           >
             <label htmlFor="raised-button-file">
               <Button
                 variant="raised"
                 component="span"
-                variant="contained"
+                // variant="contained"
                 color="secondary"
                 size="small"
                 className="upload-btn"
@@ -79,9 +56,7 @@ export class FormReceived extends Component {
         </div>
       </Container>
     ) : (
-      <Typography component="h1" variant="h5">
-        Loading...
-      </Typography>
+      <Loading></Loading>
     );
   }
 }
