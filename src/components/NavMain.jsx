@@ -22,6 +22,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(0),
+      // position: "fixed",
       // minWidth: "0px",
     },
   },

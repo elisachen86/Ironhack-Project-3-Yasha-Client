@@ -1,17 +1,17 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Fab from '@material-ui/core/Fab';
-import NavigationIcon from '@material-ui/icons/Navigation';
+import AddIcon from '@material-ui/icons/Add';
 import '../styles/dashboard.css';
 
 const useStyles = makeStyles((theme) => ({
   root: {
     '& > *': {
       margin: theme.spacing(1),
-      margin: "70px",
       position: "absolute",
-      top: 0,
-      right: 0,
+      top: "5rem",
+      right: "0.8rem",
+      zIndex: '100'
     },
   },
   extendedIcon: {
@@ -25,11 +25,10 @@ export default function FloatingActionButtons() {
   return (
     <div className={classes.root}>
       <Fab 
-      variant="extended"
-      size="medium"
+      color="secondary"
+      aria-label="add"
       >
-        <NavigationIcon className={classes.extendedIcon} />
-        Add a new order
+        <AddIcon/>
       </Fab>
     </div>
   );
