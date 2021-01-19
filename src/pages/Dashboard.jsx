@@ -8,7 +8,7 @@ import CardDashboardNotif from "../components/CardDashboardNotif";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
 import { Link } from "react-router-dom";
-import Button from "@material-ui/core/Button";
+import FloatingButton from '../components/FloatingButton';
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -256,9 +256,10 @@ class Dashboard extends Component {
           </div>
 
           <Link to="/order/new">
-            <Button color="Secondary" variant="contained">
+            {/* <Button color="Secondary" variant="contained">
             Add a new order
-            </Button>
+            </Button> */}
+            <FloatingButton></FloatingButton>
           </Link>
         </div>
         
