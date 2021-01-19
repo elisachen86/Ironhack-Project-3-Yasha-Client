@@ -9,14 +9,14 @@ import StepperTracking from "../components/StepperTracking";
 import NavOrder from "../components/NavOrder";
 import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
-import Loading from '../components/Loading';
+import Loading from "../components/Loading";
 import { UserContext } from "../components/Auth/UserContext";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 // eslint-disable-next-line
-import Grid from "@material-ui/core/Grid"
+import Grid from "@material-ui/core/Grid";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,7 +35,6 @@ const Order = (props) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
-    
     apiHandler
       .getOneOrder(props.match.params.id) // this.props
       .then((apiRes) => setOrder(apiRes))
@@ -44,47 +43,45 @@ const Order = (props) => {
 
   // console.log("Order.jsx - props",props);
   // console.log("Order.jsx - props.match.params.id", props.match.params.id);
-  // console.log("Order.jsx - order", order);
+  console.log("Order.jsx - order", order);
 
-  return order !== null? (
+  return order !== null ? (
     <div>
-      <NavOrder img="" text="Maison Colibri"></NavOrder>
+      <NavOrder order={order} img=""></NavOrder>
 
       <div className={classes.root}>
-        <StepperTracking currentStep={order[0].steps[order[0].steps.length-1].stage}></StepperTracking>
+        <StepperTracking
+          currentStep={order[0].steps[order[0].steps.length - 1].stage}
+        ></StepperTracking>
         <CardOrderStatus order={order}></CardOrderStatus>
 
-            {  order[0].steps[order[0].steps.length-1].stage === "received" &&
-            <Typography component="h1" variant="h5">
-                Order completed
-            </Typography>
-            }
+        {order[0].steps[order[0].steps.length - 1].stage === "received" && (
+          <Typography component="h1" variant="h5">
+            Order completed
+          </Typography>
+        )}
 
-       
-            <Link exact to={`/order/edit/${props.match.params.id}`}>
+        <Link exact to={`/order/edit/${props.match.params.id}`}>
+          {order[0].steps[order[0].steps.length - 1].stage === "submitted" && (
+            <Button color="Secondary" variant="contained">
+              Mark order as shipped
+            </Button>
+          )}
 
-              { order[0].steps[order[0].steps.length-1].stage === "submitted" &&
-                 <Button color="Secondary" variant="contained">
-                  Mark order as shipped
-                 </Button>
-              }
+          {order[0].steps[order[0].steps.length - 1].stage === "shipped" && (
+            <Button color="Secondary" variant="contained">
+              Mark order as received
+            </Button>
+          )}
+        </Link>
 
-              {  order[0].steps[order[0].steps.length-1].stage === "shipped" &&
-                 <Button color="Secondary" variant="contained">
-                  Mark order as received
-                 </Button>
-              }
-
-            </Link>
-        
-        
         <OrderMessage></OrderMessage>
         <OrderMessage></OrderMessage>
       </div>
     </div>
   ) : (
     <Loading></Loading>
-  )
+  );
 };
 
 export default Order;
