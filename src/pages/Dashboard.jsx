@@ -22,75 +22,9 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     const data = await apiHandler.getAllOrders();
-    // componentDidMount() {
-    // const data = [
-    //   {
-    //     season: "y16",
-    //     items: [
-    //       { price: 1, quantity: 40 },
-    //       { price: 3, quantity: 90 },
-    //       { price: 5, quantity: 100 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y16",
-    //     items: [
-    //       { price: 4, quantity: 20 },
-    //       { price: 3, quantity: 90 },
-    //       { price: 5, quantity: 70 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y16",
-    //     items: [
-    //       { price: 6, quantity: 20 },
-    //       { price: 3, quantity: 90 },
-    //       { price: 5, quantity: 50 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y17",
-    //     items: [
-    //       { price: 9, quantity: 20 },
-    //       { price: 6, quantity: 90 },
-    //       { price: 5, quantity: 50 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y17",
-    //     items: [
-    //       { price: 5, quantity: 20 },
-    //       { price: 2, quantity: 90 },
-    //       { price: 5, quantity: 200 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y17",
-    //     items: [
-    //       { price: 5, quantity: 20 },
-    //       { price: 9, quantity: 90 },
-    //       { price: 5, quantity: 400 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y18",
-    //     items: [
-    //       { price: 10, quantity: 20 },
-    //       { price: 28, quantity: 90 },
-    //       { price: 5, quantity: 200 },
-    //     ],
-    //   },
-    //   {
-    //     season: "y18",
-    //     items: [
-    //       { price: 5, quantity: 20 },
-    //       { price: 30, quantity: 90 },
-    //       { price: 40, quantity: 400 },
-    //     ],
-    //   },
-    // ];
 
-    console.log(data);
+
+    // console.log(data);
     function groupBySector(arg) {
       const sortedData = data.reduce((acc, obj) => {
         obj.total = obj.items.reduce(
@@ -113,31 +47,29 @@ class Dashboard extends Component {
       return result;
     }
 
-    // function groupBySteps() {
-    //   const statusCheck = {
-    //     submitted: 0,
-    //     shipped: 0,
-    //     received: 0,
-    //   };
+    function groupBySteps(arg) {
+      const statusCheck = {
+        submitted: 0,
+        shipped: 0,
+        received: 0,
+      };
 
-    //   data.forEach((arr) => {
-    //     const currentStep = arr.steps[arr.steps.length - 1].stage;
-    //     if (currentStep === "submitted")
-    //       statusCheck.submitted = statusCheck.submitted + 1;
-    //     else if (currentStep === "shipped")
-    //       statusCheck.shipped = statusCheck.shipped + 1;
-    //     else if (currentStep === "received")
-    //       statusCheck.received = statusCheck.received + 1;
-    //   });
+      arg.forEach((arr) => {
+        const currentStep = arr.steps[arr.steps.length - 1].stage;
+        if (currentStep === "submitted")
+          statusCheck.submitted = statusCheck.submitted + 1;
+        else if (currentStep === "shipped")
+          statusCheck.shipped = statusCheck.shipped + 1;
+        else if (currentStep === "received")
+          statusCheck.received = statusCheck.received + 1;
+      });
 
-    //   return statusCheck;
-    // }
-    // console.log("here", this.props.context)
+      return statusCheck;
+    }
 
     this.setState({
       orders: data,
-      ordersBySector: groupBySector("season"),
-      // steps: groupBySteps(),
+      ordersBySector: groupBySector("season"), ordersBySteps: groupBySteps(data),
     });
   }
 
@@ -198,14 +130,8 @@ class Dashboard extends Component {
             </Grid>
           </Grid>
 
-          <Stepper></Stepper>
+          <Stepper steps={this.state.ordersBySteps}></Stepper>
 
-          {/* <Grid item>
-            <Typography variant="h5" color="textSecondary" gutterBottom>
-              steps: submitted: {this.state.steps.submitted}, shipped:{" "}
-              {this.state.steps.shipped}, received: {this.state.steps.received}
-            </Typography>
-          </Grid> */}
 
           <div className="dashboard-scrollbox">
             {/* <CardDashboard

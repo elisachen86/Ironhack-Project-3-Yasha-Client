@@ -14,12 +14,35 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 
+
+
 const SeasonGeography = (props) => {
 
 
   const { ordersBySector } = props.location.state
 
-  console.log(ordersBySector)
+  // console.log(ordersBySector)
+
+
+  function groupBySteps(arg) {
+    const statusCheck = {
+      submitted: 0,
+      shipped: 0,
+      received: 0,
+    };
+
+    arg.forEach((arr) => {
+      const currentStep = arr.steps[arr.steps.length - 1].stage;
+      if (currentStep === "submitted")
+        statusCheck.submitted = statusCheck.submitted + 1;
+      else if (currentStep === "shipped")
+        statusCheck.shipped = statusCheck.shipped + 1;
+      else if (currentStep === "received")
+        statusCheck.received = statusCheck.received + 1;
+    });
+
+    return statusCheck;
+  }
 
   return (
   
@@ -38,8 +61,12 @@ const SeasonGeography = (props) => {
             <strong>  {ordersBySector[1].length} </strong>
             orders worth <strong>{ordersBySector[1].reduce((acc, currentValue) => acc += currentValue.total, 0 )}</strong>
           </Typography>
-          <Stepper></Stepper>
+
+
+          <Stepper steps={groupBySteps(ordersBySector[1])}></Stepper>
         </Grid>
+
+
         {/* <CardCategory
           geography="Middle East"
           orders="34"

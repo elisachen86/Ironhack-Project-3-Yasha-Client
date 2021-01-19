@@ -5,7 +5,7 @@ import { useRouteMatch } from "react-router-dom";
 import "../styles/orders.css";
 
 import apiHandler from "../api/apiHandler";
-import Stepper from "../components/Stepper";
+import StepperTracking from "../components/StepperTracking";
 import NavOrder from "../components/NavOrder";
 import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
@@ -49,8 +49,9 @@ const Order = (props) => {
   return order !== null? (
     <div>
       <NavOrder img="" text="Maison Colibri"></NavOrder>
+
       <div className={classes.root}>
-        <Stepper></Stepper>
+        <StepperTracking currentStep={order[0].steps[order[0].steps.length-1].stage}></StepperTracking>
         <CardOrderStatus order={order}></CardOrderStatus>
 
             {  order[0].steps[order[0].steps.length-1].stage === "received" &&
