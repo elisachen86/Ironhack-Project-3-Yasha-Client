@@ -48,7 +48,7 @@ export class FormCoProfileEdit extends Component {
       .editCompanyInfo(this.state)
       .then((data) => {
         // authContext.setUser(data);
-        this.props.history.push("/dashboard");
+        this.props.history.push("/company");
       })
       .catch((error) => {
         console.log(error);
@@ -69,11 +69,7 @@ export class FormCoProfileEdit extends Component {
           >
             Your Company Info
           </Typography>
-          <form
-            onSubmit={this.handleSubmit}
-            onChange={this.handleChange}
-            noValidate
-          >
+          <form onSubmit={this.handleSubmit} noValidate>
             <TextField
               id="name"
               name="name"
@@ -81,7 +77,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Company Name"
-              defaultValue={this.state.name}
+              value={this.state.name}
+              onChange={this.handleChange}
             />
 
             <FormControl fullWidth variant="outlined" margin="normal">
@@ -94,10 +91,10 @@ export class FormCoProfileEdit extends Component {
                 id="companyType"
                 name="companyType"
                 onChange={this.handleChange}
-                defaultValue={this.state.companyType}
+                value={this.state.companyType}
               >
-                <MenuItem value="Retailer">Retailer</MenuItem>
-                <MenuItem value="Brand">Brand</MenuItem>
+                <MenuItem value="retailer">Retailer</MenuItem>
+                <MenuItem value="brand">Brand</MenuItem>
               </Select>
             </FormControl>
 
@@ -108,7 +105,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Main Email Contact"
-              defaultValue={this.state.email}
+              value={this.state.email}
+              onChange={this.handleChange}
             />
             <TextField
               id="phoneNumber"
@@ -117,7 +115,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Main Phone Number"
-              defaultValue={this.state.phoneNumber}
+              value={this.state.phoneNumber}
+              onChange={this.handleChange}
             />
             <TextField
               id="vatNb"
@@ -126,7 +125,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="VAT Number"
-              defaultValue={this.state.vatNb}
+              value={this.state.vatNb}
+              onChange={this.handleChange}
             />
             <TextField
               id="shippingAddress"
@@ -135,7 +135,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Shipping Address"
-              defaultValue={this.state.shippingAddress}
+              value={this.state.shippingAddress}
+              onChange={this.handleChange}
             />
             <TextField
               id="billingAddress"
@@ -144,7 +145,8 @@ export class FormCoProfileEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Billing Address"
-              defaultValue={this.state.billingAddress}
+              value={this.state.billingAddress}
+              onChange={this.handleChange}
             />
             <Typography variant="h6">Current users</Typography>
             {this.state.userList.map((user) => {

@@ -57,7 +57,7 @@ const NavMain = (props) => {
       });
   }
 
-  console.log(context);
+  // console.log(context);
 
   return (
     <AppBar position="static">
@@ -91,13 +91,12 @@ const NavMain = (props) => {
                     onClick={handleClick}
                   >
                     {context.user && (
-                    <Avatar
-                      alt={context.user.firstName}
-                      src={context.user.avatar}
-                      className={classes.small}
-                    ></Avatar>
-                 
-                  )} 
+                      <Avatar
+                        alt={context.user.firstName}
+                        src={context.user.avatar}
+                        className={classes.small}
+                      ></Avatar>
+                    )}
                   </Button>
                   <Menu
                     id="simple-menu"

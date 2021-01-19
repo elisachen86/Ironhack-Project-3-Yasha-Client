@@ -83,8 +83,6 @@ export default {
       .catch(errorHandler);
   },
 
-  getCompanyInfo() {},
-
   editCompanyInfo(companyInfo) {
     return service
       .patch("/api/company/mycompany", companyInfo)

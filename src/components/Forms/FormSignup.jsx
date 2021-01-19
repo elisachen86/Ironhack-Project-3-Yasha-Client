@@ -13,6 +13,10 @@ import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+import InputLabel from "@material-ui/core/InputLabel";
+import MenuItem from "@material-ui/core/MenuItem";
+import Select from "@material-ui/core/Select";
+import FormControl from "@material-ui/core/FormControl";
 
 class FormSignup extends Component {
   static contextType = UserContext;
@@ -35,8 +39,14 @@ class FormSignup extends Component {
     apiHandler
       .signup(this.state)
       .then((data) => {
+        // console.log(data);
+        apiHandler.createCompany({
+          name: this.state.company,
+          companyType: this.state.companyType,
+        });
+        // data.company = this.state.company;
         this.context.setUser(data);
-        apiHandler.createCompany({ name: this.state.company });
+        this.props.history.push("/profile");
       })
       .catch((error) => {
         console.log(error);
@@ -49,26 +59,6 @@ class FormSignup extends Component {
     }
 
     return (
-      // <form onSubmit={this.handleSubmit}>
-      //   <label htmlFor="email">Email</label>
-      //   <input
-      //     onChange={this.handleChange}
-      //     value={this.state.email}
-      //     type="email"
-      //     id="email"
-      //     name="email"
-      //   />
-      //   <label htmlFor="password">Password</label>
-      //   <input
-      //     onChange={this.handleChange}
-      //     value={this.state.password}
-      //     type="password"
-      //     id="password"
-      //     name="password"
-      //   />
-      //   <button>Submit</button>
-      // </form>
-
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div>
@@ -77,86 +67,95 @@ class FormSignup extends Component {
           </Typography>
           <form onSubmit={this.handleSubmit} noValidate>
             <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
+              <TextField
+                autoComplete="fname"
+                name="firstName"
+                variant="outlined"
+                required
+                fullWidth
+                id="firstName"
+                label="First Name"
+                autoFocus
+                margin="normal"
+                onChange={this.handleChange}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="lastName"
+                label="Last Name"
+                name="lastName"
+                autoComplete="lname"
+                margin="normal"
+                onChange={this.handleChange}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                type="email"
+                id="email"
+                label="Email Address"
+                name="email"
+                autoComplete="email"
+                margin="normal"
+                autoFocus
+                onChange={this.handleChange}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="Password"
+                type="password"
+                id="password"
+                margin="normal"
+                autoComplete="current-password"
+                onChange={this.handleChange}
+              />
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="company"
+                label="Company"
+                type="company"
+                id="company"
+                margin="normal"
+                autoComplete="Company"
+                onChange={this.handleChange}
+              />
+              <FormControl fullWidth variant="outlined" margin="normal">
+                <InputLabel shrink="true" id="companyType">
+                  Company Type
+                </InputLabel>
+                <Select
                   fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
+                  labelId="companyType"
+                  id="companyType"
+                  name="companyType"
                   onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  type="email"
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                  autoFocus
-                  onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={this.handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="company"
-                  label="Company"
-                  type="company"
-                  id="company"
-                  autoComplete="Company"
-                  onChange={this.handleChange}
-                />
-              </Grid>
+                >
+                  <MenuItem value="retailer">Retailer</MenuItem>
+                  <MenuItem value="brand">Brand</MenuItem>
+                </Select>
+              </FormControl>
 
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox
-                      onChange={this.handleChange}
-                      value="allowExtraEmails"
-                      color="primary"
-                    />
-                  }
-                  id="allowExtraEmails"
-                  name="allowExtraEmails"
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                />
-              </Grid>
+              <FormControlLabel
+                control={
+                  <Checkbox
+                    onChange={this.handleChange}
+                    value="allowExtraEmails"
+                    color="primary"
+                    margin="normal"
+                  />
+                }
+                id="allowExtraEmails"
+                name="allowExtraEmails"
+                label="I want to receive inspiration, marketing promotions and updates via email."
+              />
             </Grid>
             <Button type="submit" fullWidth variant="contained" color="primary">
               Sign Up

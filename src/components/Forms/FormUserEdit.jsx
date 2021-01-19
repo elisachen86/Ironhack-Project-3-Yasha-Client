@@ -4,14 +4,13 @@ import { withUser } from "../Auth/withUser";
 import apiHandler from "../../api/apiHandler";
 
 import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import InputLabel from "@material-ui/core/InputLabel";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import FormControl from "@material-ui/core/FormControl";
+// import InputLabel from "@material-ui/core/InputLabel";
+// import MenuItem from "@material-ui/core/MenuItem";
+// import Select from "@material-ui/core/Select";
+// import FormControl from "@material-ui/core/FormControl";
 import Box from "@material-ui/core/Box";
 
 export class FormUserEdit extends Component {
@@ -20,14 +19,20 @@ export class FormUserEdit extends Component {
   componentDidMount() {
     const { context } = this.props;
     const { user } = context;
-    console.log(user);
 
-    this.setState({
-      firstName: user.firstName,
-      lastName: user.lastName,
-      email: user.email,
-      password: user.password,
-    });
+    this.setState(user);
+
+    // apiHandler
+    // .getUserCompanyInfo()
+    // .then((data) => {
+    // this.setState(user);
+    // this.setState({
+    //   company: data,
+    // });
+    // })
+    // .catch((error) => {
+    //   console.log(error);
+    // });
   }
 
   handleChange = (event) => {
@@ -55,7 +60,12 @@ export class FormUserEdit extends Component {
   };
 
   render() {
-    console.log(this.props);
+    // console.log(
+    //   this.state.company &&
+    //     this.state.company.companyType &&
+    //     typeof this.state.company.companyType
+    // );
+
     return this.state.firstName ? (
       <Container component="main" maxWidth="xs" className="auth-container">
         <div>
@@ -67,11 +77,7 @@ export class FormUserEdit extends Component {
           >
             Complete your profile
           </Typography>
-          <form
-            onSubmit={this.handleSubmit}
-            onChange={this.handleChange}
-            noValidate
-          >
+          <form onSubmit={this.handleSubmit} noValidate>
             <TextField
               id="firstName"
               name="firstName"
@@ -79,7 +85,8 @@ export class FormUserEdit extends Component {
               variant="outlined"
               margin="normal"
               label="First Name"
-              defaultValue={this.state.firstName}
+              value={this.state.firstName}
+              onChange={this.handleChange}
               margin="normal"
             />
             <TextField
@@ -89,7 +96,8 @@ export class FormUserEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Last Name"
-              defaultValue={this.state.lastName}
+              value={this.state.lastName}
+              onChange={this.handleChange}
             />
             <TextField
               id="email"
@@ -98,7 +106,9 @@ export class FormUserEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Email Address"
-              defaultValue={this.state.email}
+              // helperText="Please enter a valid email address"
+              value={this.state.email}
+              onChange={this.handleChange}
             />
             <TextField
               id="password"
@@ -107,16 +117,17 @@ export class FormUserEdit extends Component {
               variant="outlined"
               margin="normal"
               label="Password"
-              defaultValue={this.state.password}
+              value={this.state.password}
+              onChange={this.handleChange}
             />
-            <TextField
+            {/* <TextField
               id="company"
               name="company"
               fullWidth
               variant="outlined"
               margin="normal"
               label="Company Name"
-              defaultValue={this.state.company}
+              value={this.state.company.name}
             />
             <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel shrink="true" id="userType">
@@ -124,17 +135,21 @@ export class FormUserEdit extends Component {
               </InputLabel>
               <Select
                 fullWidth
-                labelId="userType"
-                id="userType"
-                name="userType"
-                defaultValue={this.state.userType}
+                labelId="companyType"
+                id="companyType"
+                name="companyType"
+                value={
+                  this.state.company.companyType
+                    ? this.state.company.companyType
+                    : ""
+                }
                 onChange={this.handleChange}
               >
-                <MenuItem value="Retailer">Retailer</MenuItem>
-                <MenuItem value="Brand">Brand</MenuItem>
+                <MenuItem value="retailer">Retailer</MenuItem>
+                <MenuItem value="brand">Brand</MenuItem>
               </Select>
-            </FormControl>
-            <FormControl fullWidth variant="outlined" margin="normal">
+            </FormControl> */}
+            {/* <FormControl fullWidth variant="outlined" margin="normal">
               <InputLabel shrink="true" id="permission">
                 Permission
               </InputLabel>
@@ -149,7 +164,7 @@ export class FormUserEdit extends Component {
                 <MenuItem value="Admin">Admin</MenuItem>
                 <MenuItem value="Editor">Editor</MenuItem>
               </Select>
-            </FormControl>
+            </FormControl> */}
             <input
               accept="image/*"
               style={{ display: "none" }}
