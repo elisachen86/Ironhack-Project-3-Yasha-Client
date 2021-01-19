@@ -27,6 +27,7 @@ export default class NewOrder extends Component {
       },
     ],
     paymentTerms: {},
+    items: [],
   };
 
   componentDidMount = async () => {
@@ -45,6 +46,15 @@ export default class NewOrder extends Component {
 
     this.setState({ [key]: value });
   };
+
+  //   handleChangeItem = (event) => {
+  //     const value = event.target.value;
+  //     const key = event.target.name;
+
+  //     this.setState({
+  //       items: [...this.state.items, { [key]: value }],
+  //     });
+  //   };
 
   handleChangePaymentAmount = (event) => {
     const value = event.target.value;
@@ -66,6 +76,15 @@ export default class NewOrder extends Component {
   };
 
   handleSubmit = (event) => {
+    // const itemObj = {
+    //   itemName: this.state.itemName,
+    //   price: this.state.price,
+    //   quantity: this.state.quantity,
+    // };
+    // this.setState({
+    //   items: [...this.state.items, itemObj],
+    // });
+
     event.preventDefault();
     this.state.users.push(this.context.user._id);
 
@@ -189,20 +208,23 @@ export default class NewOrder extends Component {
                 name="itemName"
                 label="Item Name"
                 variant="outlined"
+                onChange={this.handleChange}
               />
               <TextField
                 id="price"
-                name="Price"
+                name="price"
                 label="Price"
                 type="number"
                 variant="outlined"
+                onChange={this.handleChange}
               />
               <TextField
                 id="quantity"
-                name="Quantity"
+                name="quantity"
                 label="Quantity"
                 type="number"
                 variant="outlined"
+                onChange={this.handleChange}
               />
             </Grid>
 
