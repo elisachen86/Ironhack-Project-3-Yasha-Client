@@ -70,45 +70,44 @@ function getStepContent(stage) {
 // };
 
 export default function HorizontalLabelPositionBelowStepper(props) {
-
-  
-  const [countSubmitted, setSubmittedCount] = useState(null);
-  const [countShipped, setShippedCount] = useState(null);
-  const [countReceived, setReceivedCount] = useState(null);
+  // console.log("here", props.steps)
 
 
-      useEffect(() => {
-        apiHandler.getAllOrders()
-                .then((result) => {
-            let counter1 = 0
-            let counter2 = 0
-            let counter3 = 0
+  // const [countSubmitted, setSubmittedCount] = useState(null);
+  // const [countShipped, setShippedCount] = useState(null);
+  // const [countReceived, setReceivedCount] = useState(null);
+
+
+  //     useEffect(() => {
+  //       apiHandler.getAllOrders()
+  //               .then((result) => {
+  //           let counter1 = 0
+  //           let counter2 = 0
+  //           let counter3 = 0
             
-            result.forEach((arr) => {
+  //           result.forEach((arr) => {
 
-              const currentStep = arr.steps[arr.steps.length-1].stage
-              // console.log(currentStep)
-              if (currentStep === "submitted") counter1 += 1
-              // else if(currentStep === "confirmed") setCount2(countConfirmed+1)
-              // else if(currentStep === "packed") setCount3(countPacked+1)
-              // else if(currentStep === "ready to ship") setCount4(countReadyToShip+1)
-              else if(currentStep === "shipped") counter2 += 1
-              else if(currentStep === "received") counter3 += 1
+  //             const currentStep = arr.steps[arr.steps.length-1].stage
+  //             // console.log(currentStep)
+  //             if (currentStep === "submitted") counter1 += 1
+  //             // else if(currentStep === "confirmed") setCount2(countConfirmed+1)
+  //             // else if(currentStep === "packed") setCount3(countPacked+1)
+  //             // else if(currentStep === "ready to ship") setCount4(countReadyToShip+1)
+  //             else if(currentStep === "shipped") counter2 += 1
+  //             else if(currentStep === "received") counter3 += 1
 
-            })
+  //           })
 
-            setSubmittedCount(counter1)
-            setShippedCount(counter2)
-            setReceivedCount(counter3)
-                  },
-                  // Note: it's important to handle errors here
-                  // instead of a catch() block so that we don't swallow
-                  // exceptions from actual bugs in components.
-                  (error) => {
-                    console.log(error)
-                  }
-                )
-            }, [countSubmitted, countShipped, countReceived])
+  //           setSubmittedCount(counter1)
+  //           setShippedCount(counter2)
+  //           setReceivedCount(counter3)
+  //                 },
+
+  //                 (error) => {
+  //                   console.log(error)
+  //                 }
+  //               )
+  //           }, [countSubmitted, countShipped, countReceived])
 
 
 
@@ -116,12 +115,14 @@ export default function HorizontalLabelPositionBelowStepper(props) {
   const activeStep = 0;
   const steps = getSteps();
   const stepperClasses = useStepperStyles();
-  const arrayCount = [countSubmitted, countShipped, countReceived ]
-  console.log(arrayCount)
+  // const arrayCount = [countSubmitted, countShipped, countReceived ]
+  let {submitted, shipped, received} = props.steps
+  const arrayCount = [submitted, shipped, received ]
+
+  // console.log(arrayCount)
 
 
-
-    if (!countSubmitted && countShipped && countReceived ) {
+    if (!props.steps) {
       return <div>Loading.....</div>;
     }
 
@@ -138,7 +139,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
         {steps.map((
           label, index // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
         ) => (
-          <Step key={label}>
+          <Step key={label} active={false}>
             <StepLabel>
             {arrayCount[index]}
             <br/>
