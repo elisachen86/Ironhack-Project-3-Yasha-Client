@@ -9,6 +9,8 @@ import StepperTracking from "../components/StepperTracking";
 import NavOrder from "../components/NavOrder";
 import CardOrderStatus from "../components/CardOrderStatus";
 import OrderMessage from "../components/OrderMessage";
+import OrderComment from "../components/OrderComment";
+
 import Loading from "../components/Loading";
 import { UserContext } from "../components/Auth/UserContext";
 
@@ -75,8 +77,12 @@ const Order = (props) => {
           )}
         </Link>
 
-        <OrderMessage></OrderMessage>
-        <OrderMessage></OrderMessage>
+        {order[0].comments.map((arr) => 
+           <OrderMessage messages={arr}></OrderMessage>
+        )}      
+            
+        <OrderComment order={order[0]}></OrderComment> 
+
       </div>
     </div>
   ) : (

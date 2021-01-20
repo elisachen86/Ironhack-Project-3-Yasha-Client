@@ -56,7 +56,7 @@ export default class CardOrderStatus extends Component {
   };
 
   render() {
-    console.log("cardOrderStatus - props", this.props.order); // object
+    // console.log("cardOrderStatus - props", this.props.order); // object
 
     const currentOrder = this.props.order[0]
 
@@ -107,7 +107,6 @@ export default class CardOrderStatus extends Component {
                 {currentOrder.paymentHistory.length === 1 && <Button {...bindTrigger(popupState)}>NOT PAID</Button>}
                 {currentOrder.paymentHistory.length === 2 && <Button {...bindTrigger(popupState)}>PARTIALLY PARID</Button>}
                 {currentOrder.paymentHistory.length === 2 && <Button {...bindTrigger(popupState)}>FULLY PAID</Button>} */}
-
 
                 <Popover
                   {...bindPopover(popupState)}
@@ -160,9 +159,6 @@ export default class CardOrderStatus extends Component {
                         )}{")"}
 
                     </Typography> }
-
-
-
 
                   </Box>
                 </Popover>

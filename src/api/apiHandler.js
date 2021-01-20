@@ -118,4 +118,11 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  createOneComment(orderId, data) {
+    return service
+      .patch(`/api/order/comment/${orderId}`, data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };
