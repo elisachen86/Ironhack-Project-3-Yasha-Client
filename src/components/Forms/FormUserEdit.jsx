@@ -50,7 +50,7 @@ export class FormUserEdit extends Component {
   handleFileSelect = (temporaryURL) => {
     // Get the temporaryURL from the UploadWidget component and
     // set the state so we can have a visual feedback on what the image will look like :)
-    this.setState({ avatar: temporaryURL });
+    this.setState({ shippingDocs: temporaryURL });
   };
 
   handleSubmit = (event) => {

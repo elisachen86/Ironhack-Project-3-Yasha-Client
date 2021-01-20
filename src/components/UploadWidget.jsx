@@ -12,7 +12,7 @@ const UploadWidget = React.forwardRef((props, ref) => {
     // See <FormProfile /> or <ItemForm />
     const file = event.target.files[0];
     const tempURL = URL.createObjectURL(file);
-    props.onFileSelect && props.onFileSelect(tempURL);
+    props.onFileSelect && props.onFileSelect(tempURL, props.name, ref);
     // ^------------------------ You can use guard operators in your normal javascript too !
     // This means that the prop onFileSelect isn't mandatory in order to use this component.
   };

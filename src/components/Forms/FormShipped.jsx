@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
+import apiHandler from "../../api/apiHandler";
+import UploadWidget from "../UploadWidget";
 
 import Loading from "../Loading";
 
@@ -12,16 +14,23 @@ import CloudUploadSharpIcon from "@material-ui/icons/CloudUploadSharp";
 import "../../styles/formShipped.css";
 
 export class FormShipped extends Component {
+  docRef = React.createRef();
+
   render() {
     // console.log("Form Shipped - props", this.props);
 
     return this.props !== null ? (
       <Container component="main" maxWidth="xs" className="shipped-container">
         <div className="shipped-card">
-
-        {/* FOR PROJECT PRESENTATION PURPOSES - DO NOT KEEP THIS IMG
+          {/* FOR PROJECT PRESENTATION PURPOSES - DO NOT KEEP THIS IMG
         CREDITS: https://dribbble.com/shots/14966911-FICHA-illustrations */}
-        <div className="shipped-item"><img src="/images/shipment-pic.png" alt="Shipment-illustration" className="ship-pic"/></div>
+          <div className="shipped-item">
+            <img
+              src="/images/shipment-pic.png"
+              alt="Shipment-illustration"
+              className="ship-pic"
+            />
+          </div>
           <div className="shipped-item">
             <Typography
               align="center"
@@ -33,12 +42,13 @@ export class FormShipped extends Component {
               Is your order ready to ship?
             </Typography>
           </div>
-          <form
-            onSubmit={this.props.handleSubmit}
-            onChange={this.props.handleChange}
-            noValidate
-          >
+          <form onSubmit={this.props.handleSubmit} noValidate>
             <label htmlFor="raised-button-file">
+              <UploadWidget
+                ref={this.docRef}
+                onFileSelect={this.props.handleChange}
+                name="shippingDoc"
+              ></UploadWidget>
               <Button
                 // variant="raised"
                 component="span"
