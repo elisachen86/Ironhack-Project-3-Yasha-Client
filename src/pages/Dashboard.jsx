@@ -2,13 +2,15 @@
 // For the desktop version: the notifications and filters will appear on the side (when activated?/clicked on)
 
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
+
+import { withUser } from "../components/Auth/withUser";
+import apiHandler from "../api/apiHandler";
 import Stepper from "../components/Stepper";
 import CardDashboard from "../components/CardDashboard";
 import CardDashboardNotif from "../components/CardDashboardNotif";
-import { withUser } from "../components/Auth/withUser";
-import apiHandler from "../api/apiHandler";
-import { Link } from "react-router-dom";
-import FloatingButton from '../components/FloatingButton';
+import FloatingButton from "../components/FloatingButton";
+import CardFilters from "../components/CardFilters";
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -22,7 +24,6 @@ class Dashboard extends Component {
 
   async componentDidMount() {
     const data = await apiHandler.getAllOrders();
-
 
     // console.log(data);
     function groupBySector(arg) {
@@ -69,7 +70,8 @@ class Dashboard extends Component {
 
     this.setState({
       orders: data,
-      ordersBySector: groupBySector("season"), ordersBySteps: groupBySteps(data),
+      ordersBySector: groupBySector("season"),
+      ordersBySteps: groupBySteps(data),
     });
   }
 
@@ -132,6 +134,7 @@ class Dashboard extends Component {
 
           <Stepper steps={this.state.ordersBySteps}></Stepper>
 
+          <CardFilters orders={this.state.orders}></CardFilters>
 
           <div className="dashboard-scrollbox">
             {/* <CardDashboard
@@ -182,13 +185,9 @@ class Dashboard extends Component {
           </div>
 
           <Link to="/order/new">
-            {/* <Button color="Secondary" variant="contained">
-            Add a new order
-            </Button> */}
             <FloatingButton></FloatingButton>
           </Link>
         </div>
-        
       </div>
     );
   }
