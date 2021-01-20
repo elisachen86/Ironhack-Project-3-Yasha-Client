@@ -27,8 +27,8 @@ dayjs.extend(timezone);
 dayjs.extend(advancedFormat);
 dayjs.extend(LocalizedFormat);
 
-var relativeTime = require('dayjs/plugin/relativeTime')
-dayjs.extend(relativeTime)
+var relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 export default class CardOrderStatus extends Component {
   state = {};
@@ -58,49 +58,119 @@ export default class CardOrderStatus extends Component {
   render() {
     // console.log("cardOrderStatus - props", this.props.order); // object
 
-    const currentOrder = this.props.order[0]
+    const currentOrder = this.props.order[0];
 
     return this.props.order ? (
       <Card>
-        <CardContent>
-          <Typography color="textSecondary">
-            ${this.calculateTotalCost()}
-          </Typography>
+        <PopupState variant="popover" popupId="demo-popup-popover">
+          {(popupState) => (
+            <div>
+              <CardContent {...bindTrigger(popupState)}>
+                <Typography color="textSecondary">
+                  ${this.calculateTotalCost()}
+                </Typography>
 
-          <Typography color="textSecondary">
-            {this.calculateTotalQty()} units
-          </Typography>
-          <Typography variant="h5" component="h2">
-            <HourglassEmptyIcon></HourglassEmptyIcon>
-            {
-              this.props.order[0].steps[this.props.order[0].steps.length - 1]
-                .stage
-            }{" "}
-            on{" "}
-            {dayjs(
-              `${
-                this.props.order[0].steps[this.props.order[0].steps.length - 1]
-                  .date
-              }`
-            )
-              .locale("en")
-              .format("LLLL")}
-            {/* dddd Do YYYY kk mm Z or LLLL | toNow et tz.guess() for the timezone dont work*/}
-          </Typography>
-          <Typography color="textSecondary">
-            <DescriptionIcon></DescriptionIcon>Terms and Conditions
-          </Typography>
-        </CardContent>
+                <Typography color="textSecondary">
+                  {this.calculateTotalQty()} units
+                </Typography>
+                <Typography variant="h5" component="h2">
+                  <HourglassEmptyIcon></HourglassEmptyIcon>
+                  {
+                    this.props.order[0].steps[
+                      this.props.order[0].steps.length - 1
+                    ].stage
+                  }{" "}
+                  on{" "}
+                  {dayjs(
+                    `${
+                      this.props.order[0].steps[
+                        this.props.order[0].steps.length - 1
+                      ].date
+                    }`
+                  )
+                    .locale("en")
+                    .format("LLLL")}
+                  {/* dddd Do YYYY kk mm Z or LLLL | toNow et tz.guess() for the timezone dont work*/}
+                </Typography>
+                <Typography color="textSecondary">
+                  <DescriptionIcon></DescriptionIcon>Terms and Conditions
+                </Typography>
+              </CardContent>
+
+              <Popover
+                {...bindPopover(popupState)}
+                anchorOrigin={{
+                  vertical: "center",
+                  horizontal: "center",
+                }}
+                transformOrigin={{
+                  vertical: "center",
+                  horizontal: "center",
+                }}
+              >
+                <Box p={2}>
+                  <Typography>Order History</Typography>
+                  <Typography>
+                    {" "}
+                    <CheckSharpIcon></CheckSharpIcon>
+                    Submitted on{" "}
+                    {dayjs(`${this.props.order[0].steps[0].date}`).format(
+                      "dddd Do YYYY kk mm"
+                    )}
+                    '{" "}
+                  </Typography>
+                  {this.props.order[0].steps[1] ? (
+                    <Typography>
+                      {" "}
+                      <CheckSharpIcon></CheckSharpIcon>
+                      Shipment confirmed on{" "}
+                      {dayjs(`${this.props.order[0].steps[1].date}`).format(
+                        "dddd Do YYYY kk mm"
+                      )}
+                      '{" "}
+                    </Typography>
+                  ) : (
+                    <Typography>
+                      {" "}
+                      <HourglassEmptyIcon></HourglassEmptyIcon>
+                      Your order has not been shipped yet
+                    </Typography>
+                  )}
+
+                  {this.props.order[0].steps[2] ? (
+                    <Typography>
+                      {" "}
+                      <CheckSharpIcon></CheckSharpIcon>
+                      Received on{" "}
+                      {dayjs(`${this.props.order[0].steps[2].date}`).format(
+                        "dddd Do YYYY kk mm"
+                      )}
+                      '{" "}
+                    </Typography>
+                  ) : (
+                    <Typography>
+                      {" "}
+                      <HourglassEmptyIcon></HourglassEmptyIcon>
+                      You have not received your order yet
+                    </Typography>
+                  )}
+                </Box>
+              </Popover>
+            </div>
+          )}
+        </PopupState>
 
         <CardActions>
           <PopupState variant="popover" popupId="demo-popup-popover">
             {(popupState) => (
               <div>
                 <Button {...bindTrigger(popupState)}>
-                {currentOrder.paymentHistory.length === undefined && "Not paid"}
-                {currentOrder.paymentHistory.length === 1 && "Not paid"}
-                {currentOrder.paymentHistory.length === 2 && "First payment completed"}
-                {currentOrder.paymentHistory.length === 3 && "Fully paid" } 
+                  {currentOrder.paymentHistory.length === undefined &&
+                    "Not paid"}
+                  {currentOrder.paymentHistory.length === 1 && "Not paid"}
+                  {currentOrder.paymentHistory.length === 2 &&
+                    "First payment completed"}
+                  {currentOrder.paymentHistory.length === 3 && "Fully paid"}
                 </Button>
 
                 {/* {currentOrder.paymentHistory.length === undefined && <Button {...bindTrigger(popupState)}>NOT PAID</Button>}
@@ -123,43 +193,62 @@ export default class CardOrderStatus extends Component {
                     <Typography>Payment terms</Typography>
                     <Typography>
                       {" "}
-                      <CheckSharpIcon></CheckSharpIcon>                
-                      first payment:{currentOrder.paymentTerms.firstPaymentAmount*this.calculateTotalCost()/100}${" |"} 
-                      second payment:{currentOrder.paymentTerms.secondPaymentAmount*this.calculateTotalCost()/100}${" "}
-    
+                      <CheckSharpIcon></CheckSharpIcon>
+                      first payment:
+                      {(currentOrder.paymentTerms.firstPaymentAmount *
+                        this.calculateTotalCost()) /
+                        100}
+                      ${" |"}
+                      second payment:
+                      {(currentOrder.paymentTerms.secondPaymentAmount *
+                        this.calculateTotalCost()) /
+                        100}
+                      ${" "}
                     </Typography>
 
                     <Typography>Payment history</Typography>
 
-                    {currentOrder.paymentHistory.length === undefined &&  
-                    <Typography>Haven' paied anything yet, start your first payment</Typography>}
+                    {currentOrder.paymentHistory.length === undefined && (
+                      <Typography>
+                        Haven' paied anything yet, start your first payment
+                      </Typography>
+                    )}
 
-                    {currentOrder.paymentHistory.length === 1 && 
-                    <Typography>Haven' paied anything yet, start your first payment </Typography>}
+                    {currentOrder.paymentHistory.length === 1 && (
+                      <Typography>
+                        Haven' paied anything yet, start your first payment{" "}
+                      </Typography>
+                    )}
 
-                    {currentOrder.paymentHistory.length > 1 && 
-                    <Typography>  
-                    <CheckSharpIcon></CheckSharpIcon>
-                    First payment is made on the date : {" "}
-                    {dayjs(`${currentOrder.paymentHistory[1].date}`).fromNow()}
-                    {" "}
-                    {"("} {dayjs(`${currentOrder.paymentHistory[1].date}`).format(
-                      'DD/MM/YYYY'
-                        )}{")"}
-                    </Typography>}
+                    {currentOrder.paymentHistory.length > 1 && (
+                      <Typography>
+                        <CheckSharpIcon></CheckSharpIcon>
+                        First payment is made on the date :{" "}
+                        {dayjs(
+                          `${currentOrder.paymentHistory[1].date}`
+                        ).fromNow()}{" "}
+                        {"("}{" "}
+                        {dayjs(`${currentOrder.paymentHistory[1].date}`).format(
+                          "DD/MM/YYYY"
+                        )}
+                        {")"}
+                      </Typography>
+                    )}
 
-                    {currentOrder.paymentHistory.length > 2 && 
-                    <Typography>
-                    <CheckSharpIcon></CheckSharpIcon>
-                    This order is fully paid on the date : {" "}
-                    {dayjs(`${currentOrder.paymentHistory[2].date}`).fromNow()}
-                    {" "}
-                    {"("} {dayjs(`${currentOrder.paymentHistory[2].date}`).format(
-                      'DD/MM/YYYY'
-                        )}{")"}
-
-                    </Typography> }
-
+                    {currentOrder.paymentHistory.length > 2 && (
+                      <Typography>
+                        <CheckSharpIcon></CheckSharpIcon>
+                        This order is fully paid on the date :{" "}
+                        {dayjs(
+                          `${currentOrder.paymentHistory[2].date}`
+                        ).fromNow()}{" "}
+                        {"("}{" "}
+                        {dayjs(`${currentOrder.paymentHistory[2].date}`).format(
+                          "DD/MM/YYYY"
+                        )}
+                        {")"}
+                      </Typography>
+                    )}
                   </Box>
                 </Popover>
               </div>
