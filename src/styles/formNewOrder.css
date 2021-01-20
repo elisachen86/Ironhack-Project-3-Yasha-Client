@@ -1,0 +1,17 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans&display=swap");
+
+.label-date {
+  color: #8a8a8a;
+  font-size: 0.75em;
+  font-family: "Open Sans";
+  margin-top: 15px;
+}
+
+.input-date {
+  border: none;
+  font-family: "Open Sans";
+  color: grey;
+  border-bottom: 1px solid grey;
+  padding: 0;
+  margin-right: 2rem;
+}
