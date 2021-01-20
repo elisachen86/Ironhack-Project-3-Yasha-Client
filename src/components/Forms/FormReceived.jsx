@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Loading from "../Loading";
+import UploadWidget from "../UploadWidget";
 
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
@@ -12,6 +13,8 @@ import CloudUploadSharpIcon from "@material-ui/icons/CloudUploadSharp";
 import "../../styles/formReceived.css";
 
 export class FormReceived extends Component {
+  docRef = React.createRef();
+
   render() {
     // console.log("Form Received - Props", this.props);
 
@@ -38,12 +41,14 @@ export class FormReceived extends Component {
             </Typography>
           </div>
 
-          <form
-            onSubmit={this.props.handleSubmit}
-            onChange={this.props.handleChange}
-            noValidate
-          >
+          <form onSubmit={this.props.handleSubmit} noValidate>
             <label htmlFor="raised-button-file">
+              <UploadWidget
+                ref={this.docRef}
+                onFileSelect={this.props.handleChange}
+                name="receivedDoc"
+              ></UploadWidget>
+
               <Button
                 variant="raised"
                 component="span"

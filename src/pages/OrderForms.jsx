@@ -39,19 +39,20 @@ class OrderForms extends Component {
     }
   };
 
-  handleSubmit = (event) => {
-    event.preventDefault();
+  // KEEP THIS IN CASE WE HAVE ANY STAGES THAT DON'T HAVE A FILE
+  //   handleSubmit = (event) => {
+  //     event.preventDefault();
 
-    apiHandler
-      .updateOneOrder(this.props.match.params.id)
-      .then((data) => {
-        apiHandler.getOneOrder(this.props.match.params.id);
-        this.props.history.push(`/order/${this.props.match.params.id}`);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
+  //     apiHandler
+  //       .updateOneOrder(this.props.match.params.id)
+  //       .then((data) => {
+  //         apiHandler.getOneOrder(this.props.match.params.id);
+  //         this.props.history.push(`/order/${this.props.match.params.id}`);
+  //       })
+  //       .catch((error) => {
+  //         console.log(error);
+  //       });
+  //   };
 
   handleSubmitWithFile = (event) => {
     event.preventDefault();
@@ -97,7 +98,7 @@ class OrderForms extends Component {
           <FormReceived
             orders={this.state.orders}
             handleChange={this.handleChange}
-            handleSubmit={this.handleSubmit}
+            handleSubmit={this.handleSubmitWithFile}
           ></FormReceived>
         )}
 
