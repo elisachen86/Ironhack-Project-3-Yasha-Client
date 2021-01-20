@@ -47,7 +47,7 @@ const Order = (props) => {
 
   return order !== null ? (
     <div>
-      <NavOrder img="" text="Maison Colibri"></NavOrder>
+      <NavOrder order={order} img=""></NavOrder>
 
       <div className={classes.root}>
         <StepperTracking

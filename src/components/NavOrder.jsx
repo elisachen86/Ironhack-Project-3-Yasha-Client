@@ -7,12 +7,14 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
 const NavOrder = (props) => {
+
+  console.log("navOrder.jsx - props", props);
   return (
     <div>
       <AppBar color="textSecondary" position="static">
         <Toolbar>
           <img src="" alt="" />
-          <Typography variant="h6">{props.text}</Typography>
+          <Typography variant="h6">{props.order[0].name}</Typography>
           <Link exact to={`/dashboard`}>
           <IconButton>
             <CloseIcon />

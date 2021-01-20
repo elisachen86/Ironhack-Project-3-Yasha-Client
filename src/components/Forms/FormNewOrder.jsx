@@ -15,6 +15,9 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 
+import CalendarInput from "../CalendarInput";
+import "../../styles/formNewOrder.css";
+
 export default class NewOrder extends Component {
   static contextType = UserContext;
 
@@ -133,6 +136,12 @@ export default class NewOrder extends Component {
               onChange={this.handleChange}
             />
 
+            {/* DOES NOT WORK WHEN CLICKING ON THE INPUT */}
+            <CalendarInput
+              name="date"
+              placeholder="20/06/2020"
+              onChange={this.handleChange}
+            />
             {/* <KeyboardDatePicker
               disableToolbar
               variant="inline"
@@ -147,8 +156,9 @@ export default class NewOrder extends Component {
               }}
             /> */}
 
-            <label htmlFor="">Date</label>
+            <label className="label-date">Date</label>
             <input
+              className="input-date"
               onChange={this.handleChange}
               name="date"
               type="Date"
@@ -230,9 +240,12 @@ export default class NewOrder extends Component {
 
             <Grid Container>
               <Grid container direction="column">
-                <label htmlFor="">1st Payment Due</label>
+                <label className="label-date" htmlFor="">
+                  1st Payment Due
+                </label>
                 <Grid container direction="row">
                   <input
+                    className="input-date"
                     id="firstPaymentDate"
                     name="firstPaymentDate"
                     type="Date"
@@ -249,9 +262,12 @@ export default class NewOrder extends Component {
                 </Grid>
               </Grid>
               <Grid container direction="column">
-                <label htmlFor="">2nd Payment Due</label>
+                <label className="label-date" htmlFor="">
+                  2nd Payment Due
+                </label>
                 <Grid container direction="row">
                   <input
+                    className="input-date"
                     id="secondPaymentDate"
                     name="secondPaymentDate"
                     type="Date"

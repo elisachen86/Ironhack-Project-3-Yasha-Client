@@ -7,6 +7,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import HourglassEmptyIcon from "@material-ui/icons/HourglassEmpty";
 import DescriptionIcon from "@material-ui/icons/Description";
+import CheckSharpIcon from "@material-ui/icons/CheckSharp";
+
+// IMPORTS REQUIRED FOR THE POPOVER
+import Box from "@material-ui/core/Box";
+import Popover from "@material-ui/core/Popover";
+import PopupState, { bindTrigger, bindPopover } from "material-ui-popup-state";
+import Loading from "./Loading";
 
 // PLUGINS REQUIRED TO FORMAT THE DATE
 const dayjs = require("dayjs");
@@ -46,9 +53,7 @@ export default class CardOrderStatus extends Component {
   };
 
   render() {
-    // console.log("props", this.props.order); // object
-    // this.calculateTotalCost()
-    // console.log(this.calculateTotalCost());
+    console.log("cardOrderStatus - props", this.props.order); // object
 
     return this.props.order ? (
       <Card>
@@ -81,14 +86,78 @@ export default class CardOrderStatus extends Component {
             <DescriptionIcon></DescriptionIcon>Terms and Conditions
           </Typography>
         </CardContent>
+
         <CardActions>
-          <Button>Not paid</Button>
+          <PopupState variant="popover" popupId="demo-popup-popover">
+            {(popupState) => (
+              <div>
+                <Button {...bindTrigger(popupState)}>Not paid</Button>
+                <Popover
+                  {...bindPopover(popupState)}
+                  anchorOrigin={{
+                    vertical: "center",
+                    horizontal: "center",
+                  }}
+                  transformOrigin={{
+                    vertical: "center",
+                    horizontal: "center",
+                  }}
+                >
+                  <Box p={2}>
+                    <Typography>Order History</Typography>
+                    <Typography>
+                      {" "}
+                      <CheckSharpIcon></CheckSharpIcon>
+                      Submitted on{" "}
+                      {dayjs(`${this.props.order[0].steps[0].date}`).format(
+                        "dddd Do YYYY kk mm"
+                      )}
+                      '{" "}
+                    </Typography>
+                    {this.props.order[0].steps[1] ? (
+                      <Typography>
+                        {" "}
+                        <CheckSharpIcon></CheckSharpIcon>
+                        Shipment confirmed on{" "}
+                        {dayjs(`${this.props.order[0].steps[1].date}`).format(
+                          "dddd Do YYYY kk mm"
+                        )}
+                        '{" "}
+                      </Typography>
+                    ) : (
+                      <Typography>
+                        {" "}
+                        <HourglassEmptyIcon></HourglassEmptyIcon>
+                        Your order has not been shipped yet
+                      </Typography>
+                    )}
+
+                    {this.props.order[0].steps[2] ? (
+                      <Typography>
+                        {" "}
+                        <CheckSharpIcon></CheckSharpIcon>
+                        Received on{" "}
+                        {dayjs(`${this.props.order[0].steps[2].date}`).format(
+                          "dddd Do YYYY kk mm"
+                        )}
+                        '{" "}
+                      </Typography>
+                    ) : (
+                      <Typography>
+                        {" "}
+                        <HourglassEmptyIcon></HourglassEmptyIcon>
+                        You have not received your order yet
+                      </Typography>
+                    )}
+                  </Box>
+                </Popover>
+              </div>
+            )}
+          </PopupState>
         </CardActions>
       </Card>
     ) : (
-      <Typography component="h1" variant="h5">
-        loading
-      </Typography>
+      <Loading></Loading>
     );
   }
 }
