@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router";
 import { withUser } from "../Auth/withUser";
 import apiHandler from "../../api/apiHandler";
+import UploadWidget from "../UploadWidget";
 
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -15,6 +16,8 @@ import Box from "@material-ui/core/Box";
 
 export class FormUserEdit extends Component {
   state = {};
+
+  avatarRef = React.createRef();
 
   componentDidMount() {
     const { context } = this.props;
@@ -44,12 +47,28 @@ export class FormUserEdit extends Component {
     this.setState({ [key]: value });
   };
 
+  handleFileSelect = (temporaryURL) => {
+    // Get the temporaryURL from the UploadWidget component and
+    // set the state so we can have a visual feedback on what the image will look like :)
+    this.setState({ avatar: temporaryURL });
+  };
+
   handleSubmit = (event) => {
     event.preventDefault();
     const { context } = this.props;
 
+    const fd = new FormData();
+    for (const key in this.state) {
+      if (key === "avatar") continue;
+      fd.append(key, this.state[key]);
+    }
+
+    if (this.avatarRef.current.files[0]) {
+      fd.append("avatar", this.avatarRef.current.files[0]);
+    }
+
     apiHandler
-      .editUserInfo(this.state)
+      .editUserInfo(fd)
       .then((data) => {
         context.setUser(data);
         this.props.history.push("/dashboard");
@@ -174,17 +193,24 @@ export class FormUserEdit extends Component {
               margin="normal"
               type="file"
             />
-            <label htmlFor="raised-button-file">
-              <Button
-                variant="raised"
-                component="span"
-                variant="contained"
-                color="secondary"
-                size="small"
-                className="upload-btn"
+            <label name="avatar" htmlFor="avatar">
+              <UploadWidget
+                ref={this.avatarRef}
+                onFileSelect={this.handleFileSelect}
+                name="avatar"
               >
-                Upload a Profile Picture
-              </Button>
+                {/* <Button
+                  name="avatar"
+                  variant="raised"
+                  component="span"
+                  variant="contained"
+                  color="secondary"
+                  size="small"
+                  className="upload-btn"
+                >
+                  Upload a Profile Picture
+                </Button> */}
+              </UploadWidget>
             </label>
 
             <Box className="button-box">
