@@ -77,12 +77,11 @@ const Order = (props) => {
           )}
         </Link>
 
-        {order[0].comments.map((arr) => 
-           <OrderMessage messages={arr}></OrderMessage>
-        )}      
-            
-        <OrderComment order={order[0]}></OrderComment> 
+        {order[0].comments.map((arr) => (
+          <OrderMessage messages={arr}></OrderMessage>
+        ))}
 
+        <OrderComment order={order[0]}></OrderComment>
       </div>
     </div>
   ) : (

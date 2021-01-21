@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import apiHandler from "../api/apiHandler";
 
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,43 +40,12 @@ function getSteps() {
   ];
 }
 
-function getStepContent(stage) {
-  switch (
-    stage // stage c'est l'étape
-  ) {
-    case "submitted": // la partie de l'array qui change
-      return <div>fejfeiafjaoifjaiofjaeiofjaoijfao</div>; // la partie jsx qui va être render dynamiquement
-    case "completed":
-      return "What is an ad group anyways?";
-    case "ready_to_ship":
-      return "This is the bit I really care about!";
-    default:
-      return "Unknown stepIndex";
-  }
-}
-
-// const getStage = (steps, stages) => {
-//   const currentStep = steps[steps.length - 1];
-  
-//   const index = stages.findIndex((stage) => {
-//     return currentStep.stage === stage;
-//   });
-//   return stages[index + 1];
-// };
-
-// module.exports = {
-//   stages,
-//   getStage,
-// };
-
 export default function HorizontalLabelPositionBelowStepper(props) {
   // console.log("here", props.steps)
-
 
   // const [countSubmitted, setSubmittedCount] = useState(null);
   // const [countShipped, setShippedCount] = useState(null);
   // const [countReceived, setReceivedCount] = useState(null);
-
 
   //     useEffect(() => {
   //       apiHandler.getAllOrders()
@@ -84,7 +53,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
   //           let counter1 = 0
   //           let counter2 = 0
   //           let counter3 = 0
-            
+
   //           result.forEach((arr) => {
 
   //             const currentStep = arr.steps[arr.steps.length-1].stage
@@ -109,22 +78,19 @@ export default function HorizontalLabelPositionBelowStepper(props) {
   //               )
   //           }, [countSubmitted, countShipped, countReceived])
 
-
-
   const classes = useStyles();
   const activeStep = 0;
   const steps = getSteps();
   const stepperClasses = useStepperStyles();
   // const arrayCount = [countSubmitted, countShipped, countReceived ]
-  let {submitted, shipped, received} = props.steps
-  const arrayCount = [submitted, shipped, received ]
+  let { submitted, shipped, received } = props.steps;
+  const arrayCount = [submitted, shipped, received];
 
   // console.log(arrayCount)
 
-
-    if (!props.steps) {
-      return <div>Loading.....</div>;
-    }
+  if (!props.steps) {
+    return <div>Loading.....</div>;
+  }
 
   return (
     <div className={classes.root}>
@@ -137,13 +103,14 @@ export default function HorizontalLabelPositionBelowStepper(props) {
         alternativeLabel
       >
         {steps.map((
-          label, index // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
+          label,
+          index // ici on map l'array avec en dessous chaque label (inscription en dessous du point)
         ) => (
           <Step key={label} active={false}>
             <StepLabel>
-            {arrayCount[index]}
-            <br/>
-            {label}
+              {arrayCount[index]}
+              <br />
+              {label}
             </StepLabel>
           </Step>
         ))}
@@ -154,7 +121,6 @@ export default function HorizontalLabelPositionBelowStepper(props) {
             <Typography className={classes.instructions}>
               All steps completed
             </Typography>
-            <Button>Reset</Button>
           </div>
         ) : (
           <div>

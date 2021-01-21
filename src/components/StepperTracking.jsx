@@ -1,4 +1,4 @@
-import React , { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import apiHandler from "../api/apiHandler";
 
 import Stepper from "@material-ui/core/Stepper";
@@ -6,18 +6,18 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import StepConnector from '@material-ui/core/StepConnector';
-import PropTypes from 'prop-types';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
-import clsx from 'clsx';
-import Check from '@material-ui/icons/Check';
+import StepConnector from "@material-ui/core/StepConnector";
+import PropTypes from "prop-types";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
+import Check from "@material-ui/icons/Check";
 import "../styles/orders.css";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
     backgroundColor: "none",
+    color: "#DAABB0",
   },
   backButton: {
     marginRight: theme.spacing(1),
@@ -30,52 +30,49 @@ const useStyles = makeStyles((theme) => ({
 
 const useQontoStepIconStyles = makeStyles({
   root: {
-    color: '#bdbdc1',
-    display: 'flex',
+    color: "#DAABB0",
+    display: "flex",
     height: 22,
-    alignItems: 'center',
+    alignItems: "center",
   },
   active: {
-    color: '#33333',
+    color: "#DAABB0",
   },
   circle: {
     width: 8,
     height: 8,
-    borderRadius: '50%',
-    backgroundColor: 'currentColor',
+    borderRadius: "50%",
+    backgroundColor: "currentColor",
   },
   completed: {
-    color: '#3d3d3d',
+    color: "#DAABB0",
     zIndex: 1,
     fontSize: 18,
   },
 });
 
-
 const QontoConnector = withStyles({
   alternativeLabel: {
     top: 10,
-    left: 'calc(-50% + 16px)',
-    right: 'calc(50% + 16px)',
+    left: "calc(-50% + 16px)",
+    right: "calc(50% + 16px)",
   },
   active: {
-    '& $line': {
-      borderColor: '#33333',
+    "& $line": {
+      borderColor: "#DAABB0",
     },
   },
   completed: {
-    '& $line': {
-      borderColor: '#33333',
+    "& $line": {
+      borderColor: "#DAABB0",
     },
   },
   line: {
-    borderColor: '#33333',
+    borderColor: "#DAABB0",
     borderTopWidth: 3,
     borderRadius: 1,
   },
 })(StepConnector);
-
-
 
 function QontoStepIcon(props) {
   const classes = useQontoStepIconStyles();
@@ -87,11 +84,14 @@ function QontoStepIcon(props) {
         [classes.active]: active,
       })}
     >
-      {completed ? <Check className={classes.completed} /> : <div className={classes.circle} />}
+      {completed ? (
+        <Check className={classes.completed} />
+      ) : (
+        <div className={classes.circle} />
+      )}
     </div>
   );
 }
-
 
 QontoStepIcon.propTypes = {
   /**
@@ -103,7 +103,6 @@ QontoStepIcon.propTypes = {
    */
   completed: PropTypes.bool,
 };
-
 
 const useStepperStyles = makeStyles({
   paper: {
@@ -122,23 +121,21 @@ function getSteps() {
   ];
 }
 
-
 export default function HorizontalLabelPositionBelowStepper(props) {
-
-
   const classes = useStyles();
 
   // const activeStep = props.currentStep;
-  const steps = getSteps();  
+  const steps = getSteps();
 
-  const [activeStep, setActiveStep] = React.useState(steps.indexOf(props.currentStep));
+  const [activeStep, setActiveStep] = React.useState(
+    steps.indexOf(props.currentStep) + 1
+  );
 
   const stepperClasses = useStepperStyles();
 
-
-    if (!props.currentStep) {
-      return <div>Loading.....</div>;
-    }
+  if (!props.currentStep) {
+    return <div>Loading.....</div>;
+  }
 
   return (
     <div className={classes.root}>
@@ -162,12 +159,12 @@ export default function HorizontalLabelPositionBelowStepper(props) {
         ))}
       </Stepper> */}
 
-
-
-      <Stepper alternativeLabel 
-            classes={{root: stepperClasses.paper}}
-            activeStep={activeStep} 
-            connector={<QontoConnector />}>
+      <Stepper
+        alternativeLabel
+        classes={{ root: stepperClasses.paper }}
+        activeStep={activeStep}
+        connector={<QontoConnector />}
+      >
         {steps.map((label) => (
           <Step key={label}>
             <StepLabel StepIconComponent={QontoStepIcon}>{label}</StepLabel>
@@ -181,11 +178,9 @@ export default function HorizontalLabelPositionBelowStepper(props) {
             <Typography className={classes.instructions}>
               All steps completed
             </Typography>
-            <Button>Reset</Button>
           </div>
         ) : (
-          <div>
-          </div>
+          <div></div>
         )}
       </div>
     </div>
