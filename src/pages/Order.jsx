@@ -77,7 +77,9 @@ const Order = (props) => {
           )}
         </Link>
 
-        <Typography variant="h5">Download order documents</Typography>
+        {order[0].documents.length > 0 && (
+          <Typography variant="h5">Download order documents</Typography>
+        )}
         {order[0].documents &&
           order[0].documents.map((document) => {
             return (
