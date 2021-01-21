@@ -15,7 +15,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import Button from "@material-ui/core/Button";
 
-import CalendarInput from "../CalendarInput";
+// import CalendarInput from "../CalendarInput";
 import "../../styles/formNewOrder.css";
 
 export default class NewOrder extends Component {
@@ -136,12 +136,12 @@ export default class NewOrder extends Component {
               onChange={this.handleChange}
             />
 
-            {/* DOES NOT WORK WHEN CLICKING ON THE INPUT */}
+            {/* DOES NOT WORK WHEN CLICKING ON THE INPUT
             <CalendarInput
               name="date"
               placeholder="20/06/2020"
               onChange={this.handleChange}
-            />
+            /> */}
             {/* <KeyboardDatePicker
               disableToolbar
               variant="inline"

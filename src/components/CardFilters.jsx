@@ -24,9 +24,10 @@ const CardFilters = (props) => {
   const [orderStatus, setOrderStatus] = useState([]);
   const [paymentStatus, setPaymentStatus] = useState([]);
 
-  console.log("CardFilters - orders prop", props);
+  // console.log("CardFilters - orders prop", props);
 
-  // HANDLERS
+  // >>>>>>> HANDLERS <<<<<<<<<
+
   //   const handleDelete = () => {
   //     console.info("You clicked the delete icon.");
   //   };
@@ -97,19 +98,22 @@ const CardFilters = (props) => {
   };
 
   const handlePayment = (order) => {
+    // console.log(order.paymentHistory.length - 1, "order.paymentHistory");
+
     if (!paymentStatus.length) return true;
     return paymentStatus.includes(
       order.paymentHistory[order.paymentHistory.length - 1].payment
     );
   };
-  console.log(props.orders, "orders before");
+  // console.log(props.orders, "orders before");
   const filteredOrders = props.orders
     .filter(handlePayment)
     .filter(handleCategory)
     .filter(filterOrderStatus)
     .filter(handleFilterSeason);
 
-  console.log(filteredOrders, "filter orders");
+  // console.log(filteredOrders, "filter orders");
+
   return (
     <div>
       <div className={classes.root}>
