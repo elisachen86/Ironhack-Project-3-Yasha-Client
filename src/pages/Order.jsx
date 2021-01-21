@@ -45,7 +45,7 @@ const Order = (props) => {
 
   // console.log("Order.jsx - props",props);
   // console.log("Order.jsx - props.match.params.id", props.match.params.id);
-  console.log("Order.jsx - order", order);
+  // console.log("Order.jsx - order", order);
 
   return order !== null ? (
     <div>
@@ -89,11 +89,12 @@ const Order = (props) => {
             );
           })}
 
-        {order[0].comments.map((arr) => (
+        {/* {order[0].comments.map((arr) => (
           <OrderMessage messages={arr}></OrderMessage>
-        ))}
+        ))} */}
 
         <OrderComment order={order[0]}></OrderComment>
+        
       </div>
     </div>
   ) : (

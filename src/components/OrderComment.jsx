@@ -1,6 +1,7 @@
 import React, {useState } from 'react'
 import { withUser } from "./Auth/withUser";
 import apiHandler from "../api/apiHandler";
+import OrderMessage from "./OrderMessage";
 
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -44,10 +45,12 @@ const OrderComment = (props) => {
     const currentUser = props.context.user
     const currentOrder = props.order
 
-    // console.log("here at comment", currentUser)    
+    // console.log("here at comment", currentOrder)    
 
     const classes = useStyles();
     const [Comment, setComment] = useState("")
+    const [CommentLists, setCommentLists] = useState(currentOrder.comments)
+
     const handleChange = (event) => {
             // console.log('typing')
             setComment(event.currentTarget.value)
@@ -69,18 +72,31 @@ const OrderComment = (props) => {
 
             apiHandler
                 .createOneComment(currentOrder._id, commentData)
-                .then(res => console.log(res))
+                .then(result => setCommentLists(result["comments"]))
+                .then(setComment(""))
                 .catch(error => console.log(error))
         }
 
+
+      // const updateComment = (newComment) => {
+      //     setCommentLists(CommentLists.concat(newComment))
+      // }
+
     return (
         <div>
+
+        {CommentLists.map((arr) => (
+          <OrderMessage messages={arr}></OrderMessage>
+        ))}
+
 
         <form onSubmit={handleSubmit}>
 
          <TextField id="comment" name="comment" 
                 fullWidth label="comment" 
                 onChange={handleChange}
+                value={Comment}
+                placeholder="Write your comments here"
         />
 
            <Button 
