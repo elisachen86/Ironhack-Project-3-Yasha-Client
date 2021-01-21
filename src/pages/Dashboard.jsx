@@ -106,7 +106,7 @@ class Dashboard extends Component {
           </div>
           <div className="dashboard-budget">
             <Typography variant="h5" color="textSecondary" gutterBottom>
-              You're open to buy
+              Your open-to-buy
             </Typography>
           </div>
         </div>
@@ -163,7 +163,7 @@ class Dashboard extends Component {
                           state: {ordersBySector: true }
                         }} >   */}
 
-            {this.state.ordersBySector.map((arr, index) => (
+            {/* {this.state.ordersBySector.map((arr, index) => (
               <Link
                 to={{
                   pathname: `/dashboard/categories/${index}`,
@@ -181,7 +181,7 @@ class Dashboard extends Component {
                   )}
                 ></CardDashboard>
               </Link>
-            ))}
+            ))} */}
           </div>
 
           <Link to="/order/new">

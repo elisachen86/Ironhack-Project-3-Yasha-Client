@@ -1,9 +1,12 @@
+// eslint-disable-next-line
 import React, { useState, useEffect } from "react";
+// eslint-disable-next-line
 import apiHandler from "../api/apiHandler";
 
 import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
+// eslint-disable-next-line
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import StepConnector from "@material-ui/core/StepConnector";
@@ -127,6 +130,7 @@ export default function HorizontalLabelPositionBelowStepper(props) {
   // const activeStep = props.currentStep;
   const steps = getSteps();
 
+  // eslint-disable-next-line
   const [activeStep, setActiveStep] = React.useState(
     steps.indexOf(props.currentStep) + 1
   );
