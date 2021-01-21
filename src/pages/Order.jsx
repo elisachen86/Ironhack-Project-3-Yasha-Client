@@ -59,7 +59,7 @@ const Order = (props) => {
 
         {order[0].steps[order[0].steps.length - 1].stage === "received" && (
           <Typography component="h1" variant="h5">
-            Order completed
+            {/* Order completed */}
           </Typography>
         )}
 
@@ -76,6 +76,18 @@ const Order = (props) => {
             </Button>
           )}
         </Link>
+
+        <Typography variant="h5">Download order documents</Typography>
+        {order[0].documents &&
+          order[0].documents.map((document) => {
+            return (
+              <Typography variant="body1">
+                <a href={document.docUrl} target="_blank">
+                  {document.docName}
+                </a>
+              </Typography>
+            );
+          })}
 
         {order[0].comments.map((arr) => (
           <OrderMessage messages={arr}></OrderMessage>
