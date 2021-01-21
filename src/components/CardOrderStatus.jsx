@@ -67,7 +67,7 @@ export default class CardOrderStatus extends Component {
             <div>
               <CardContent {...bindTrigger(popupState)}>
                 <Typography color="textSecondary">
-                  ${this.calculateTotalCost()}
+                  {this.props.order[0].currency} {this.calculateTotalCost()}
                 </Typography>
 
                 <Typography color="textSecondary">
@@ -80,16 +80,23 @@ export default class CardOrderStatus extends Component {
                       this.props.order[0].steps.length - 1
                     ].stage
                   }{" "}
-                  on{" "}
                   {dayjs(
                     `${
                       this.props.order[0].steps[
                         this.props.order[0].steps.length - 1
                       ].date
                     }`
-                  )
-                    .locale("en")
-                    .format("LLLL")}
+                  ).fromNow()}{" "}
+                  {"("}
+                  {dayjs(
+                    `${
+                      this.props.order[0].steps[
+                        this.props.order[0].steps.length - 1
+                      ].date
+                    }`
+                  ).format("DD/MM/YYYY")}
+                  {""}
+                  {")"}
                   {/* dddd Do YYYY kk mm Z or LLLL | toNow et tz.guess() for the timezone dont work*/}
                 </Typography>
                 <Typography color="textSecondary">
@@ -115,9 +122,8 @@ export default class CardOrderStatus extends Component {
                     <CheckSharpIcon></CheckSharpIcon>
                     Submitted on{" "}
                     {dayjs(`${this.props.order[0].steps[0].date}`).format(
-                      "dddd Do YYYY kk mm"
-                    )}
-                    '{" "}
+                      "DD/MM/YYYY"
+                    )}{" "}
                   </Typography>
                   {this.props.order[0].steps[1] ? (
                     <Typography>
@@ -125,9 +131,8 @@ export default class CardOrderStatus extends Component {
                       <CheckSharpIcon></CheckSharpIcon>
                       Shipment confirmed on{" "}
                       {dayjs(`${this.props.order[0].steps[1].date}`).format(
-                        "dddd Do YYYY kk mm"
-                      )}
-                      '{" "}
+                        "DD/MM/YYYY"
+                      )}{" "}
                     </Typography>
                   ) : (
                     <Typography>
@@ -143,9 +148,8 @@ export default class CardOrderStatus extends Component {
                       <CheckSharpIcon></CheckSharpIcon>
                       Received on{" "}
                       {dayjs(`${this.props.order[0].steps[2].date}`).format(
-                        "dddd Do YYYY kk mm"
-                      )}
-                      '{" "}
+                        "DD/MM/YYYY"
+                      )}{" "}
                     </Typography>
                   ) : (
                     <Typography>
@@ -190,44 +194,44 @@ export default class CardOrderStatus extends Component {
                   }}
                 >
                   <Box p={2}>
-                    <Typography>Payment terms</Typography>
+                    <Typography>Payment terms:</Typography>
                     <Typography>
                       {" "}
                       <CheckSharpIcon></CheckSharpIcon>
-                      first payment:
+                      First payment:{" "}
                       {(currentOrder.paymentTerms.firstPaymentAmount *
                         this.calculateTotalCost()) /
                         100}
-                      ${" |"}
-                      second payment:
+                      %{" | "}
+                      Second payment:{" "}
                       {(currentOrder.paymentTerms.secondPaymentAmount *
                         this.calculateTotalCost()) /
                         100}
-                      ${" "}
+                      %{" "}
                     </Typography>
-
-                    <Typography>Payment history</Typography>
+                    <br></br>
+                    <Typography>Payment history:</Typography>
 
                     {currentOrder.paymentHistory.length === undefined && (
                       <Typography>
-                        Haven' paied anything yet, start your first payment
+                        You have not paid anything yet, start your first payment
                       </Typography>
                     )}
 
                     {currentOrder.paymentHistory.length === 1 && (
                       <Typography>
-                        Haven' paied anything yet, start your first payment{" "}
+                        You have not paid anything yet, start your first payment{" "}
                       </Typography>
                     )}
 
                     {currentOrder.paymentHistory.length > 1 && (
                       <Typography>
                         <CheckSharpIcon></CheckSharpIcon>
-                        First payment is made on the date :{" "}
+                        First payment done{" "}
                         {dayjs(
                           `${currentOrder.paymentHistory[1].date}`
                         ).fromNow()}{" "}
-                        {"("}{" "}
+                        {"("}
                         {dayjs(`${currentOrder.paymentHistory[1].date}`).format(
                           "DD/MM/YYYY"
                         )}
@@ -238,11 +242,11 @@ export default class CardOrderStatus extends Component {
                     {currentOrder.paymentHistory.length > 2 && (
                       <Typography>
                         <CheckSharpIcon></CheckSharpIcon>
-                        This order is fully paid on the date :{" "}
+                        This order was fully paid{" "}
                         {dayjs(
                           `${currentOrder.paymentHistory[2].date}`
                         ).fromNow()}{" "}
-                        {"("}{" "}
+                        {"("}
                         {dayjs(`${currentOrder.paymentHistory[2].date}`).format(
                           "DD/MM/YYYY"
                         )}
