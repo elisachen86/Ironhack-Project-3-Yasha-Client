@@ -12,11 +12,11 @@ class Home extends React.Component {
           Welcome to Yasha
         </Typography>
 
-        <Link to="/dashboard">
+        {/* <Link to="/dashboard">
             <Button color="Secondary" variant="contained">
             Go to your dashboard
             </Button>
-          </Link>
+          </Link> */}
         {/* <Button variant="contained" color="primary" href="/signin">
             Log In
           </Button>
