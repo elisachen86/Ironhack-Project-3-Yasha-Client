@@ -43,6 +43,15 @@ export default class NewOrder extends Component {
     }
   };
 
+  handleChangeGoogleUrl = (event) => {
+    const value = event.target.value;
+    const key = event.target.name;
+    const splitUrl = value.split("/");
+    const googleDocId = splitUrl[5];
+
+    this.setState({ googleDocId: googleDocId });
+  };
+
   handleChange = (event) => {
     const value = event.target.value;
     const key = event.target.name;
@@ -111,6 +120,14 @@ export default class NewOrder extends Component {
         </Typography>
         <form onSubmit={this.handleSubmit}>
           <Grid container>
+            <TextField
+              id="googleUrl"
+              name="googleUrl"
+              label="Import info from a Google Sheet - copy link here"
+              margin="dense"
+              fullWidth
+              onChange={this.handleChangeGoogleUrl}
+            />
             <TextField
               id="name"
               name="name"
