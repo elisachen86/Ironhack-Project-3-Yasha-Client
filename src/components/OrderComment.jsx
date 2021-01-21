@@ -5,12 +5,18 @@ import OrderMessage from "./OrderMessage";
 
 
 import { makeStyles } from '@material-ui/core/styles';
+// eslint-disable-next-line
 import Input from '@material-ui/core/Input';
+// eslint-disable-next-line
 import InputLabel from '@material-ui/core/InputLabel';
+// eslint-disable-next-line
 import InputAdornment from '@material-ui/core/InputAdornment';
+// eslint-disable-next-line
 import FormControl from '@material-ui/core/FormControl';
 import TextField from '@material-ui/core/TextField';
+// eslint-disable-next-line
 import Grid from '@material-ui/core/Grid';
+// eslint-disable-next-line
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Button from "@material-ui/core/Button";
 
@@ -52,14 +58,12 @@ const OrderComment = (props) => {
     const [CommentLists, setCommentLists] = useState(currentOrder.comments)
 
     const handleChange = (event) => {
-            // console.log('typing')
             setComment(event.currentTarget.value)
     } 
 
     const handleSubmit = (event) => {
 
             event.preventDefault()
-            // console.log('here clicked')
 
             const commentData = {
                  message: Comment,
@@ -68,7 +72,6 @@ const OrderComment = (props) => {
                  timeStamp:  new Date()      
             }
 
-            // console.log(commentData)
 
             apiHandler
                 .createOneComment(currentOrder._id, commentData)
@@ -100,8 +103,9 @@ const OrderComment = (props) => {
         />
 
            <Button 
-                color="Secondary" variant="contained" 
-                fullWidth variant="contained" color="primary"
+                variant="contained" 
+                fullWidth variant="contained" 
+                color="primary"
                 type="submit"> 
                 send my comment
           </Button>
