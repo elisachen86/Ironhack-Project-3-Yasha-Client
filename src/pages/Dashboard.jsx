@@ -11,7 +11,7 @@ import Stepper from "../components/Stepper";
 import CardDashboardNotif from "../components/CardDashboardNotif";
 import FloatingButton from "../components/FloatingButton";
 import CardFilters from "../components/CardFilters";
-// import Chart from "../components/Chart";
+import Chart from "../components/Chart";
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -109,7 +109,7 @@ class Dashboard extends Component {
             <Typography variant="h5" color="textSecondary" gutterBottom>
               Your open-to-buy
             </Typography>
-            {/* <Chart></Chart> */}
+            <Chart></Chart>
           </div>
         </div>
         <div className="dashboard-right">

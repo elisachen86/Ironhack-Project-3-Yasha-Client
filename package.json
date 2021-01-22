@@ -9,6 +9,7 @@
     "@material-ui/pickers": "^3.2.10",
     "@material/top-app-bar": "^9.0.0",
     "axios": "^0.21.1",
+    "chart.js": "^2.9.4",
     "dayjs": "^1.10.3",
     "dotenv": "^8.2.0",
     "material-ui-popup-state": "^1.7.1",
