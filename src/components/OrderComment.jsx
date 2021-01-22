@@ -18,6 +18,7 @@ import Grid from "@material-ui/core/Grid";
 // eslint-disable-next-line
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import Button from "@material-ui/core/Button";
+import SendIcon from "@material-ui/icons/Send";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -91,6 +92,13 @@ const OrderComment = (props) => {
           onChange={handleChange}
           value={Comment}
           placeholder="Write your comments here"
+          style={{
+            backgroundColor: "#F4EEED",
+            fontStyle: "italic",
+            color: "#252A36",
+            borderRadius: "0.8em",
+            border: "none",
+          }}
         />
 
         <Button
@@ -100,7 +108,7 @@ const OrderComment = (props) => {
           color="primary"
           type="submit"
         >
-          send my comment
+          <SendIcon style={{ marginRight: "0.5em" }}></SendIcon> send my comment
         </Button>
 
         {/* <label htmlFor="comment"></label>

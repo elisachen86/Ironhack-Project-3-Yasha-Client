@@ -5,16 +5,32 @@ import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import CardAllOrdersDash from "./CardAllOrdersDash";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+
+import "../styles/dashboard.css";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    // flexWrap: "wrap",
+    flexWrap: "wrap",
     "& > *": {
       margin: theme.spacing(0.5),
     },
+  },
+}));
+
+const useStylesAccordion = makeStyles((theme) => ({
+  root: {
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
   },
 }));
 
@@ -79,7 +95,6 @@ const CardFilters = (props) => {
     //   handleFilterPayment(event);
   };
 
-  const classes = useStyles();
   //   console.log("CardFilters - props", props.orders);
 
   const filterOrderStatus = (order) => {
@@ -114,206 +129,135 @@ const CardFilters = (props) => {
 
   // console.log(filteredOrders, "filter orders");
 
+  const classes = useStyles();
+  const classesA = useStylesAccordion();
+
   return (
     <div>
-      <div className={classes.root}>
-        <Typography variant="h5" display="block">
-          <strong>Filters</strong>
-        </Typography>
-        <br />
-        <Typography variant="h6" component="h1">
-          Seasons
-        </Typography>
+      <div className={classesA.root} className={classes.root}>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1a-content"
+            id="panel1a-header"
+          >
+            <Typography variant="h5" className={classes.heading}>
+              <strong>Filters</strong>
+            </Typography>
+          </AccordionSummary>
 
-        <div>
-          <button
-            value="Jan 2020"
-            onClick={handleClickSeason}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            Jan 2020
-          </button>
-          <button
-            value="Dec 2020"
-            onClick={handleClickSeason}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            Dec 2020
-          </button>
-        </div>
+          {/* <br /> */}
+          <AccordionDetails className="accordion-flex">
+            <Typography variant="h6" component="h1">
+              Seasons
+            </Typography>
+            <button
+              className="accordion-btn"
+              value="Jan 2020"
+              onClick={handleClickSeason}
+              //   onDelete={handleDelete}
+            >
+              Jan 2020
+            </button>
+            <button
+              className="accordion-btn"
+              value="Dec 2020"
+              onClick={handleClickSeason}
+              //   onDelete={handleDelete}
+            >
+              Dec 2020
+            </button>
 
-        <Typography variant="h6" component="h1">
-          Categories
-        </Typography>
+            <Typography variant="h6" component="h1">
+              Categories
+            </Typography>
 
-        <div>
-          <button
-            value="Veggie"
-            onClick={handleClickCat}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            Veggie
-          </button>
-          <button
-            value="Cheese"
-            onClick={handleClickCat}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            Cheese
-          </button>
-          <button
-            value="Drinks"
-            onClick={handleClickCat}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            Drinks
-          </button>
-        </div>
+            <button
+              className="accordion-btn"
+              value="Veggie"
+              onClick={handleClickCat}
+              //   onDelete={handleDelete}
+            >
+              Veggie
+            </button>
+            <button
+              className="accordion-btn"
+              value="Cheese"
+              onClick={handleClickCat}
+              //   onDelete={handleDelete}
+            >
+              Cheese
+            </button>
+            <button
+              className="accordion-btn"
+              value="Drinks"
+              onClick={handleClickCat}
+              //   onDelete={handleDelete}
+            >
+              Drinks
+            </button>
 
-        <Typography variant="h6" component="h1">
-          Order status
-        </Typography>
+            <Typography variant="h6" component="h1">
+              Order status
+            </Typography>
 
-        <div>
-          <button
-            value="submitted"
-            onClick={handleClickOrder}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            submitted
-          </button>
-          <button
-            value="shipped"
-            onClick={handleClickOrder}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            shipped
-          </button>
-          <button
-            value="received"
-            onClick={handleClickOrder}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            received
-          </button>
-        </div>
+            <button
+              className="accordion-btn"
+              value="submitted"
+              onClick={handleClickOrder}
+              //   onDelete={handleDelete}
+            >
+              submitted
+            </button>
+            <button
+              className="accordion-btn"
+              value="shipped"
+              onClick={handleClickOrder}
+              //   onDelete={handleDelete}
+            >
+              shipped
+            </button>
+            <button
+              className="accordion-btn"
+              value="received"
+              onClick={handleClickOrder}
+              //   onDelete={handleDelete}
+            >
+              received
+            </button>
 
-        <Typography variant="h6" component="h1">
-          Payment status
-        </Typography>
+            <Typography variant="h6" component="h1">
+              Payment status
+            </Typography>
 
-        <div>
-          <button
-            value="not paid"
-            onClick={handleClickPayment}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            not paid
-          </button>
-          <button
-            value="partially paid"
-            onClick={handleClickPayment}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            partially paid
-          </button>
-          <button
-            value="fully paid"
-            onClick={handleClickPayment}
-            //   onDelete={handleDelete}
-            style={{
-              color: "#DAABB0",
-              fontWeight: "400",
-              backgroundColor: "transparent",
-              border: "1px solid #DAABB0",
-              borderRadius: "15px",
-              padding: "0 1em 0 1em",
-            }}
-          >
-            fully paid
-          </button>
-        </div>
+            <button
+              className="accordion-btn"
+              value="not paid"
+              onClick={handleClickPayment}
+              //   onDelete={handleDelete}
+            >
+              not paid
+            </button>
+            <button
+              className="accordion-btn"
+              value="partially paid"
+              onClick={handleClickPayment}
+              //   onDelete={handleDelete}
+            >
+              partially paid
+            </button>
+            <button
+              className="accordion-btn"
+              value="fully paid"
+              onClick={handleClickPayment}
+              //   onDelete={handleDelete}
+            >
+              fully paid
+            </button>
+          </AccordionDetails>
+        </Accordion>
       </div>
+
       <div className="dashboard-scrollbox">
         {filteredOrders.map((order) => {
           return (

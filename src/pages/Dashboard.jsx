@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import { withUser } from "../components/Auth/withUser";
 import apiHandler from "../api/apiHandler";
 import Stepper from "../components/Stepper";
-import CardDashboard from "../components/CardDashboard";
+// import CardDashboard from "../components/CardDashboard";
 import CardDashboardNotif from "../components/CardDashboardNotif";
 import FloatingButton from "../components/FloatingButton";
 import CardFilters from "../components/CardFilters";
+// import Chart from "../components/Chart";
 
 import Typography from "@material-ui/core/Typography";
 import ArrowDropDownIcon from "@material-ui/icons/ArrowDropDown";
@@ -112,6 +113,7 @@ class Dashboard extends Component {
             <Typography variant="h5" color="textSecondary" gutterBottom>
               Your open-to-buy
             </Typography>
+            {/* <Chart></Chart> */}
           </div>
         </div>
         <div className="dashboard-right">

@@ -198,16 +198,15 @@ export default class CardOrderStatus extends Component {
                     <Typography>
                       {" "}
                       <CheckSharpIcon></CheckSharpIcon>
-                      First payment:{" "}
+                      First payment: {currentOrder.currency}{" "}
                       {(currentOrder.paymentTerms.firstPaymentAmount *
                         this.calculateTotalCost()) /
                         100}
-                      %{" | "}
-                      Second payment:{" "}
+                      {" | "}
+                      Second payment: {currentOrder.currency}{" "}
                       {(currentOrder.paymentTerms.secondPaymentAmount *
                         this.calculateTotalCost()) /
-                        100}
-                      %{" "}
+                        100}{" "}
                     </Typography>
                     <br></br>
                     <Typography>Payment history:</Typography>

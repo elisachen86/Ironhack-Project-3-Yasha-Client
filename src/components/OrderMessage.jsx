@@ -23,21 +23,33 @@ dayjs.extend(relativeTime);
 const OrderMessage = (props) => {
   // console.log("being called", props)
   const singleMsg = props.messages;
-  
-  if (!singleMsg.user ) return null
-  
-      return ( 
-      <Card>   
+
+  return (
+    <Card
+      style={{
+        display: "flex",
+        borderRadius: "0.5em",
+        color: "#252A36",
+        backgroundColor: "#F4EEED",
+        margin: "1.5em",
+      }}
+    >
       <Avatar
         src={singleMsg.user.avatar}
         alt={singleMsg.user.firstName}
+        style={{
+          height: "2.8em",
+          width: "2.8em",
+          margin: "1em",
+        }}
       ></Avatar>
-      <CardContent>
-        <Typography color="textPrimary" gutterBottom>
-          {singleMsg.user.firstName} {singleMsg.user.lastName}
-        </Typography>
-
-        <Typography color="textPrimary" gutterBottom>
+      <CardContent style={{ display: "flex", flexDirection: "column" }}>
+        <Typography
+          style={{ fontWeight: "700" }}
+          color="textPrimary"
+          gutterBottom
+        >
+          {singleMsg.user.firstName} {singleMsg.user.lastName} -{" "}
           {dayjs(`${singleMsg.timeStamp}`).format("DD/MM/YYYY")}
         </Typography>
 

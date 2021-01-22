@@ -13,6 +13,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
+import SearchBar from "../components/SearchBar";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -22,6 +23,7 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       margin: theme.spacing(0),
+
       // position: "fixed",
       // minWidth: "0px",
     },
@@ -75,9 +77,10 @@ const NavMain = (props) => {
             <React.Fragment>
               <Grid container justify="center" className={classes.root}>
                 <Grid>
-                  <Button color="secondary">
+                  {/* <Button color="secondary">
                     <SearchIcon></SearchIcon>
-                  </Button>
+                  </Button> */}
+                  <SearchBar></SearchBar>
                 </Grid>
                 <Grid>
                   <Button color="secondary">
