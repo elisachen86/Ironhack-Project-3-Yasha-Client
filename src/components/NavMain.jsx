@@ -122,7 +122,7 @@ const NavMain = (props) => {
             <React.Fragment>
               <Grid item>
                 <Button href="/signin" color="inherit">
-                  Log in / Sign up
+                  Log in
                 </Button>
               </Grid>
               {/* <li>
