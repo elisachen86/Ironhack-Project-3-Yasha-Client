@@ -125,4 +125,11 @@ export default {
       .then((res) => res.data)
       .catch(errorHandler);
   },
+
+  updateOneComment(orderId, data) {
+    return service
+      .patch(`/api/order/commentupdate/${orderId}`, data)
+      .then((res) => res.data)
+      .catch(errorHandler);
+  },
 };

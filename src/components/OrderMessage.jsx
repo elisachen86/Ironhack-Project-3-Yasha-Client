@@ -3,6 +3,7 @@ import Card from "@material-ui/core/Card";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
+// import { single } from "../../../Ironhack-Project-3-Yasha-Server/config/cloudinary";
 
 // PLUGINS REQUIRED TO FORMAT THE DATE
 const dayjs = require("dayjs");
@@ -20,11 +21,13 @@ var relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 const OrderMessage = (props) => {
-  // console.log(props)
+  // console.log("being called", props)
   const singleMsg = props.messages;
-
-  return (
-    <Card>
+  
+  if (!singleMsg.user ) return null
+  
+      return ( 
+      <Card>   
       <Avatar
         src={singleMsg.user.avatar}
         alt={singleMsg.user.firstName}
@@ -43,7 +46,8 @@ const OrderMessage = (props) => {
         </Typography>
       </CardContent>
     </Card>
-  );
+  
+  )
 };
 
 export default OrderMessage;
