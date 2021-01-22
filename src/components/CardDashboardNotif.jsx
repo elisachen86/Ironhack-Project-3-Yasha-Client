@@ -44,7 +44,7 @@ const CardDashboardNotif = (props) => {
 
     props.ordersWithMessages.forEach((array) => {
       const projectFields = {
-        brandCompany: array.brandCompany.name,
+        // brandCompany: array.brandCompany.name,
         orderId: array._id,
         orderNumber: array.number,
         comments: array.comments.filter(
