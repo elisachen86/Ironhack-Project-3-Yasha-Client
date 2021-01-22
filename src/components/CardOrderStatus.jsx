@@ -169,9 +169,8 @@ export default class CardOrderStatus extends Component {
             {(popupState) => (
               <div>
                 <Button {...bindTrigger(popupState)}>
-                  {currentOrder.paymentHistory.length === undefined &&
-                    "Not paid"}
-                  {currentOrder.paymentHistory.length === 1 && "Not paid"}
+                  {currentOrder.paymentHistory.length === undefined && "unpaid"}
+                  {currentOrder.paymentHistory.length === 1 && "unpaid"}
                   {currentOrder.paymentHistory.length === 2 &&
                     "First payment completed"}
                   {currentOrder.paymentHistory.length === 3 && "Fully paid"}

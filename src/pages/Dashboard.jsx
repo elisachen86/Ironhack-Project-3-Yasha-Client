@@ -104,10 +104,11 @@ class Dashboard extends Component {
               text2="3 confirmation issues and 1 transport to organize"
               text3="3 new messages"
               text4="from Danone, Coca-Cola, Mondelez"
-              ordersWithMessages = {[...this.state.orders].filter((arr) =>  arr.comments.length > 0)}
+              ordersWithMessages={[...this.state.orders].filter(
+                (arr) => arr.comments.length > 0
+              )}
             ></CardDashboardNotif>
           </div>
-
 
           <div className="dashboard-budget">
             <Typography variant="h5" color="textSecondary" gutterBottom>
